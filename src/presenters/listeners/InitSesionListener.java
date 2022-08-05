@@ -30,26 +30,48 @@ public class InitSesionListener implements ActionListener {
         String action = e.getActionCommand();
         switch (action) {
             case "validar":
-                try {
-                    if (checkUser()) {
-                        initPageMedicalAppointment(jsonConvert);
-                        jFrameInitUser.dispose();
-                    }
-                } catch (Exception ex) {
-                    jFrameInitUser.messageInformation(ex.getMessage());
-                }
+                validateUser();
                 break;
             case "EXIT":
                 jFrameInitUser.dispose();
                 break;
             case "REGISTER":
-                try {
-                    register();
-                    jFrameInitUser.messageInformation("USUARIO REGISTRADO CON EXITO");
-                } catch (Exception ex) {
-                    jFrameInitUser.messageInformation(ex.getMessage());
-                }
+                registerUser();
                 break;
+            case "validarDoctor":
+                validateDoctor();
+                break;
+        }
+    }
+
+    private void registerUser() {
+        try {
+            register();
+            jFrameInitUser.messageInformation("USUARIO REGISTRADO CON EXITO");
+        } catch (Exception ex) {
+            jFrameInitUser.messageInformation(ex.getMessage());
+        }
+    }
+
+    private void validateUser() {
+        try {
+            if (checkUser()) {
+                initPageMedicalAppointment(jsonConvert);
+                jFrameInitUser.dispose();
+            }
+        } catch (Exception ex) {
+            jFrameInitUser.messageInformation(ex.getMessage());
+        }
+    }
+
+    private void validateDoctor() {
+        try {
+            if (appointmentManager.checkDoctor(jFrameInitUser.getjFieldNameDoctor(), jFrameInitUser.getjFieldPassword())) {
+                initFramemedical();
+                jFrameInitUser.dispose();
+            }
+        } catch (Exception ex) {
+            jFrameInitUser.messageInformation(ex.getMessage());
         }
     }
 
@@ -66,6 +88,10 @@ public class InitSesionListener implements ActionListener {
 
     public boolean checkUser() throws Exception {
         return appointmentManager.checkUser(jFrameInitUser.getjFieldIdUserEnter().getText());
+    }
+
+    public void initFramemedical() {
+        jFrameMain.navigateToHomeRegister();
     }
 
     public void register() throws Exception {

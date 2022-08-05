@@ -24,11 +24,11 @@ public class MainListeners implements ActionListener {
         String action = e.getActionCommand();
         switch (action) {
             case USUARIO:
-                presenter.init();
+                presenter.init(USUARIO);
                 jFrameMain.dispose();
                 break;
             case MEDICO:
-                jFrameMain.navigateToHomeRegister();
+                presenter.init(MEDICO);
                 break;
         }
     }

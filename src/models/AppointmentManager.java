@@ -75,6 +75,15 @@ public class AppointmentManager {
         throw new Exception("");
     }
 
+    public boolean checkDoctor(String name, String password) throws Exception {
+        for (Doctor doctor : doctorList) {
+            if (doctor.getNameDoctor().equalsIgnoreCase(name) && doctor.getIdDoctor().equalsIgnoreCase(password)) {
+                return true;
+            }
+        }
+        throw new Exception("Doctor no encontrado");
+    }
+
     public ArrayList<String> filterByModality(String modality) {
         ArrayList<MedicalAppointment> medicalPresencial = medicalAppointmentsListPresential.getListData();
         ArrayList<MedicalAppointment> medicalResidential = medicalAppointmentsListresidency.getListData();
@@ -114,8 +123,6 @@ public class AppointmentManager {
         }
         return aux;
     }
-
-
 
     public ArrayList<String> getList(ArrayList<MedicalAppointment> medicalList) {
         ArrayList<String> list = new ArrayList<>();
