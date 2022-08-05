@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class JPanelCancelAppointment extends JPanel {
 
+    private static final String CANCEL = "CANCEL";
     private AppointmentManager appointmentManager;
     private CancelListener listener;
     private JLabel jLabelCalendar;
@@ -64,7 +65,7 @@ public class JPanelCancelAppointment extends JPanel {
         this.add(jComboBoxHour);
 
         jButtonCancel = new JButton();
-        setUIComponentsJButton(jButtonCancel, "CANCELAR", "CANCEl");
+        setUIComponentsJButton(jButtonCancel, "CANCELAR", CANCEL);
     }
 
     public void putList(ArrayList<String> filter) {

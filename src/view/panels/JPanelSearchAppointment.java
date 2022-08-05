@@ -36,7 +36,7 @@ public class JPanelSearchAppointment extends JPanel {
         this.add(jTextFieldId);
 
         JButton jButtonConsult = new JButton();
-        setUIComponentsJButton(jButtonConsult, "CONSULTAR", "CONSULTAR");
+        setUIComponentsJButton(jButtonConsult, "CONSULTAR", "CONSULT");
         this.add(jButtonConsult);
 
         jTextAreaInformation = new JTextArea();
