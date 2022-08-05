@@ -15,12 +15,26 @@ public class AppointmentManager {
     private TreeAVL<MedicalAppointment> medicalAppointmentsListresidency;
     private MedicalAppointment medical;
 
-    public AppointmentManager() {
+    public AppointmentManager(ArrayList<MedicalAppointment> listPresential, ArrayList<MedicalAppointment> listResidence) {
         date = new GregorianCalendar();
         clientsRegister = new ArrayList<>();
         doctorList = new ArrayList<>();
         medicalAppointmentsListPresential = new TreeAVL<>((o1, o2) -> validateDates(o1.getDate(), o2.getDate()));
         medicalAppointmentsListresidency = new TreeAVL<>((o1, o2) -> validateDates(o1.getDate(), o2.getDate()));
+        reloadTree(listPresential, listResidence);
+    }
+
+    private void reloadTree(ArrayList<MedicalAppointment> listPresencial, ArrayList<MedicalAppointment> listResidence) {
+        try {
+            for (MedicalAppointment appointment : listPresencial) {
+                medicalAppointmentsListPresential.insert(appointment);
+            }
+            for (MedicalAppointment appointment : listResidence) {
+                medicalAppointmentsListresidency.insert(appointment);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String checkNotEmpty(String word, int length) throws Exception {
@@ -121,14 +135,6 @@ public class AppointmentManager {
         return aux;
     }
 
-    public ArrayList<String> getList(ArrayList<MedicalAppointment> medicalList) {
-        ArrayList<String> list = new ArrayList<>();
-        for (MedicalAppointment medical : medicalList) {
-            list.add(medical.toString());
-        }
-        return list;
-    }
-
     public void createAppointment(String modality, String nameDoctor, String iddoctor, String date) throws
             Exception {
         if (modality.equalsIgnoreCase("presencial")) {
@@ -159,7 +165,6 @@ public class AppointmentManager {
         GregorianCalendar dateCita = transformStringToDate(date);
         MedicalAppointment medical = new MedicalAppointment(doc, pet, dateCita, true);
         MedicalAppointment medical2;
-
         if (modality.equalsIgnoreCase("PRESENCIAL")) {
             medical2 = medicalAppointmentsListPresential.exist(medical);
         } else {
@@ -167,11 +172,7 @@ public class AppointmentManager {
         }
         medical2.setPet(pet);
         medical2.setState(true);
-
-    }
-
-    public MedicalAppointment getAppointment(String idUser) {
-        return null;
+        System.out.println(getInformationAvl());
     }
 
     public ArrayList<String> consultAppointmentsSchedule(String idUser) {
@@ -234,7 +235,6 @@ public class AppointmentManager {
                 }
             }
         }
-
     }
 
     public String getInformationAppointment(String idUser) throws Exception {
@@ -265,16 +265,25 @@ public class AppointmentManager {
         GregorianCalendar aux = transformStringToDate(date);
         Doctor doctor = foundDoctor(nameDoctor);
         for (int i = 0; i < numberOfAppointment; i++) {
-            aux.roll((Calendar.HOUR_OF_DAY),1);
-            if (doctor.getNameDoctor().equalsIgnoreCase("presencial")) {
-                medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, aux, false));
-            } else if (doctor.getNameDoctor().equalsIgnoreCase("domicilio")) {
-                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null, aux, false));
+            if (doctor.getTypeModality().equalsIgnoreCase("presencial")) {
+                System.out.println("--------");
+                medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
+            } else if (doctor.getTypeModality().equalsIgnoreCase("domicilio")) {
+                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
             }
+            aux.roll((Calendar.HOUR_OF_DAY), 1);
         }
     }
 
-    public GregorianCalendar validateDate(GregorianCalendar aux){
+    public GregorianCalendar validateDate(GregorianCalendar aux) {
         return new GregorianCalendar(aux.get(Calendar.YEAR), aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH), aux.get(Calendar.HOUR_OF_DAY) + 1, 0);
+    }
+
+    public ArrayList<MedicalAppointment> listMedicalPresencial() {
+        return medicalAppointmentsListPresential.getListData();
+    }
+
+    public ArrayList<MedicalAppointment> listMedicalResidence() {
+        return medicalAppointmentsListresidency.getListData();
     }
 }
