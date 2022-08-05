@@ -18,12 +18,26 @@ public class AppointmentManager {
     private TreeAVL<MedicalAppointment> medicalAppointmentsListresidency;
     private MedicalAppointment medical;
 
-    public AppointmentManager() {
+    public AppointmentManager(ArrayList<MedicalAppointment> listPresential, ArrayList<MedicalAppointment> listResidence) {
         date = new GregorianCalendar();
         clientsRegister = new ArrayList<>();
         doctorList = new ArrayList<>();
         medicalAppointmentsListPresential = new TreeAVL<>((o1, o2) -> validateDates(o1.getDate(), o2.getDate()));
         medicalAppointmentsListresidency = new TreeAVL<>((o1, o2) -> validateDates(o1.getDate(), o2.getDate()));
+        reloadTree(listPresential, listResidence);
+    }
+
+    private void reloadTree(ArrayList<MedicalAppointment> listPresencial, ArrayList<MedicalAppointment> listResidence) {
+        try {
+            for (MedicalAppointment appointment : listPresencial) {
+                medicalAppointmentsListPresential.insert(appointment);
+            }
+            for (MedicalAppointment appointment : listResidence) {
+                medicalAppointmentsListresidency.insert(appointment);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String checkNotEmpty(String word, int length) throws Exception {
@@ -122,14 +136,6 @@ public class AppointmentManager {
             }
         }
         return aux;
-    }
-
-    public ArrayList<String> getList(ArrayList<MedicalAppointment> medicalList) {
-        ArrayList<String> list = new ArrayList<>();
-        for (MedicalAppointment medical : medicalList) {
-            list.add(medical.toString());
-        }
-        return list;
     }
 
     public void createAppointment(String modality, String nameDoctor, String iddoctor, String date) throws
@@ -251,13 +257,21 @@ public class AppointmentManager {
                 System.out.println("--------");
                 medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
             } else if (doctor.getTypeModality().equalsIgnoreCase("domicilio")) {
-                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null,validateDate(aux), false));
+                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
             }
-            aux.roll((Calendar.HOUR_OF_DAY),1);
+            aux.roll((Calendar.HOUR_OF_DAY), 1);
         }
     }
 
-    public GregorianCalendar validateDate(GregorianCalendar aux){
+    public GregorianCalendar validateDate(GregorianCalendar aux) {
         return new GregorianCalendar(aux.get(Calendar.YEAR), aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH), aux.get(Calendar.HOUR_OF_DAY) + 1, 0);
+    }
+
+    public ArrayList<MedicalAppointment> listMedicalPresencial() {
+        return medicalAppointmentsListPresential.getListData();
+    }
+
+    public ArrayList<MedicalAppointment> listMedicalResidence() {
+        return medicalAppointmentsListresidency.getListData();
     }
 }

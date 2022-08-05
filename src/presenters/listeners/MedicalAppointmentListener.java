@@ -3,6 +3,7 @@ package presenters.listeners;
 import models.AppointmentManager;
 import presenters.JsonConvert;
 import view.panels.JPanelScheduleAppointment;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -49,13 +50,14 @@ public class MedicalAppointmentListener implements ActionListener {
     public void filterModality(){
         ArrayList<String> filter = appointmentManager.filterByModality(jPanelScheduleAppointment.getTypeModality());
         System.out.println(jPanelScheduleAppointment.getTypeModality());
-       jPanelScheduleAppointment.putList(filter);
+        jPanelScheduleAppointment.putList(filter);
     }
 
     public void schedule(){
         try {
             appointmentManager.scheduleAppointment(jPanelScheduleAppointment.getjTextFieldId(),
-                    jPanelScheduleAppointment.getTypeModality(),jPanelScheduleAppointment.getjComboBoxHour());
+                    jPanelScheduleAppointment.getTypeModality(), jPanelScheduleAppointment.getjComboBoxHour());
+            filterModality();
         } catch (Exception e) {
             e.printStackTrace();
         }

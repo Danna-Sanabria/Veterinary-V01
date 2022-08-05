@@ -13,11 +13,12 @@ import java.util.ArrayList;
 public class JsonConvert {
 
     private String path;
-    private String pathAppoiment;
+    private String pathAppointment;
+    public static final String pathAppointmentResidence = ".\\resources\\dataMedicalAppointmentResidence.json";
 
     public JsonConvert() {
         path = ".\\resources\\dataPets.json";
-        pathAppoiment = ".\\resources\\dataMedicalAppoiment.json";
+        pathAppointment = ".\\resources\\dataMedicalAppointmentPresencial.json";
     }
 
     public String medicalToJson(ArrayList<MedicalAppointment> medical) {
@@ -25,15 +26,29 @@ public class JsonConvert {
         return gson.toJson(medical);
     }
 
-    public void saveMedicalAppoiments(ArrayList<MedicalAppointment> MedicalAppointment) throws IOException {
-        System.out.println("pureuba");
-        FileWriter file = new FileWriter(pathAppoiment);
+    public void saveMedicalAppoimentsPresencial(ArrayList<MedicalAppointment> MedicalAppointment) throws IOException {
+        FileWriter file = new FileWriter(pathAppointment);
         file.write(medicalToJson(MedicalAppointment));
         file.close();
     }
 
-    public ArrayList<MedicalAppointment> readMedical() throws IOException {
-        FileReader file = new FileReader(pathAppoiment);
+    public void saveMedicalAppoimentsResidence(ArrayList<MedicalAppointment> MedicalAppointment) throws IOException {
+        FileWriter file = new FileWriter(pathAppointmentResidence);
+        file.write(medicalToJson(MedicalAppointment));
+        file.close();
+    }
+
+    public ArrayList<MedicalAppointment> readMedicalPresencial() throws IOException {
+        FileReader file = new FileReader(pathAppointment);
+        return jsonReaderMedical(file);
+    }
+
+    public ArrayList<MedicalAppointment> readMedicalResidence() throws IOException {
+        FileReader file = new FileReader(pathAppointmentResidence);
+        return jsonReaderMedical(file);
+    }
+
+    public ArrayList<MedicalAppointment> jsonReaderMedical(FileReader file) throws IOException {
         JsonReader reader = new Gson().newJsonReader(file);
         Gson gson = new Gson();
         ArrayList<MedicalAppointment> medicalList = gson.fromJson(reader, new TypeToken<ArrayList<MedicalAppointment>>() {
@@ -41,6 +56,5 @@ public class JsonConvert {
         file.close();
         return medicalList;
     }
-
 }
 
