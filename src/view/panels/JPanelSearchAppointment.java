@@ -1,19 +1,18 @@
 package view.panels;
 
 import models.AppointmentManager;
-import presenters.JsonConvert;
 import presenters.listeners.ConsultAppointmentListener;
-
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class JPanelSearchAppointment extends JPanel {
+    private static final String TEXT_LABEL_ENTER_IDENTIFICATION = "INGRESE NÚMERO DE IDENTIFICACIÓN";
+    private static final String CONSULT_APPOINTMENT = "CONSULT_APPOINTMENT";
+    private static final String TEXT_BUTTON_CONSULT = "CONSULTAR";
     private AppointmentManager appointmentManager;
     private ConsultAppointmentListener listener;
     private JTextArea jTextAreaInformation;
     private JTextField jTextFieldId;
-
 
     public JPanelSearchAppointment(AppointmentManager appointmentManager) {
         this.appointmentManager = appointmentManager;
@@ -25,18 +24,16 @@ public class JPanelSearchAppointment extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JLabel jLabelInfo = new JLabel();
-        setUIComponentesLabel(jLabelInfo,"Ingrese N° de identificación");
+        setUIComponentesLabel(jLabelInfo, TEXT_LABEL_ENTER_IDENTIFICATION);
         jLabelInfo.setForeground(new Color(253, 130, 177));
         jLabelInfo.setFont(new Font("Cambria", 1, 20));
         this.add(jLabelInfo);
 
         jTextFieldId = new JTextField();
-        jTextFieldId.addActionListener(listener);
-        jTextFieldId.setActionCommand("verificar");
         this.add(jTextFieldId);
 
         JButton jButtonConsult = new JButton();
-        setUIComponentsJButton(jButtonConsult, "CONSULTAR", "CONSULT");
+        setUIComponentsJButton(jButtonConsult, TEXT_BUTTON_CONSULT, CONSULT_APPOINTMENT);
         this.add(jButtonConsult);
 
         jTextAreaInformation = new JTextArea();
@@ -78,5 +75,9 @@ public class JPanelSearchAppointment extends JPanel {
 
     public String getjTextFieldId() {
         return jTextFieldId.getText();
+    }
+
+    public void messageInformation(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 }

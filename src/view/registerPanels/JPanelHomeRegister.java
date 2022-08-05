@@ -42,7 +42,7 @@ public class JPanelHomeRegister extends JPanel {
 
     private void initComponents() {
 
-        JLabel jLabelScheduleAppointment = new JLabel(MESSAGE_SCHEDULE,SwingConstants.CENTER);
+        JLabel jLabelScheduleAppointment = new JLabel(MESSAGE_SCHEDULE, SwingConstants.CENTER);
         jLabelScheduleAppointment.setFont(new Font("Cambria", 1, 15));
         jLabelScheduleAppointment.setForeground(new Color(220, 67, 134));
         this.add(jLabelScheduleAppointment);
@@ -60,7 +60,7 @@ public class JPanelHomeRegister extends JPanel {
         labelInformation.setForeground(new Color(220, 67, 134));
         this.add(labelInformation);
 
-        JLabel labelSchedule = new JLabel(MESSAGE_NEW_APPOINTMENTS,SwingConstants.CENTER);
+        JLabel labelSchedule = new JLabel(MESSAGE_NEW_APPOINTMENTS, SwingConstants.CENTER);
         labelSchedule.setFont(new Font("Cambria", 1, 15));
         labelSchedule.setForeground(new Color(220, 67, 134));
         this.add(labelSchedule);
@@ -69,7 +69,7 @@ public class JPanelHomeRegister extends JPanel {
         jDateChooser.setPreferredSize(new Dimension(200, 30));
         this.add(jDateChooser);
 
-        JLabel jLabelHourStar = new JLabel(MESSAGE_SELECT_HOUR,SwingConstants.CENTER);
+        JLabel jLabelHourStar = new JLabel(MESSAGE_SELECT_HOUR, SwingConstants.CENTER);
         jLabelHourStar.setFont(new Font("Cambria", 1, 15));
         jLabelHourStar.setForeground(new Color(220, 67, 134));
         this.add(jLabelHourStar);
@@ -77,7 +77,7 @@ public class JPanelHomeRegister extends JPanel {
         jComboBoxHourStart = new JComboBox<>(new String[]{"8", "9", "10", "11", "12", "14", "15", "16"});
         this.add(jComboBoxHourStart);
 
-        JLabel labelNumber = new JLabel(MESSAGE_SELECT_QUANTITY_APPOINTMENTS,SwingConstants.CENTER);
+        JLabel labelNumber = new JLabel(MESSAGE_SELECT_QUANTITY_APPOINTMENTS, SwingConstants.CENTER);
         labelNumber.setFont(new Font("Cambria", 1, 15));
         labelNumber.setForeground(new Color(220, 67, 134));
         this.add(labelNumber);
@@ -137,5 +137,10 @@ public class JPanelHomeRegister extends JPanel {
         setOpaque(false);
         super.paint(g);
     }
+
+    public void messageInformation(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
 }
+
 

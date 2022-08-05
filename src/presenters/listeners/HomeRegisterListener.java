@@ -14,6 +14,7 @@ public class HomeRegisterListener implements ActionListener{
     public static final String BACK_OPTION = "BACK";
     private static final String SHOW_SCHEDULE = "VER_AGENDA";
     private static final String SCHEDULE = "AGENDAR";
+    private static final String MESSAGE_ENTER_DATES = "INGRESE LOS DATOS CORRESPONDIENTES";
     private JPanelHomeRegister jPanelHomeRegister;
     private AppointmentManager appointmentManager;
     private JFrameMain jFrameMain;
@@ -48,7 +49,7 @@ public class HomeRegisterListener implements ActionListener{
             String aux = appointmentManager.dateformat(dateG.get(Calendar.YEAR), dateG.get(Calendar.MONTH), dateG.get(Calendar.DAY_OF_MONTH), jPanelHomeRegister.getjComboBoxHourStart());
             appointmentManager.createSchedule(jPanelHomeRegister.getjFielNumberAppointment(), jPanelHomeRegister.getNameDoctor(),aux);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            jPanelHomeRegister.messageInformation(MESSAGE_ENTER_DATES);
         }
     }
 }

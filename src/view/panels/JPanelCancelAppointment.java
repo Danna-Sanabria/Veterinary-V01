@@ -10,6 +10,15 @@ import java.util.ArrayList;
 public class JPanelCancelAppointment extends JPanel {
 
     private static final String CANCEL = "CANCEL";
+    private static final String TEXT_LABEL_CANCEL = "CANCELAR CITA";
+    private static final String TEXT_LABEL_ENTER_ID = "INGRESE NÚMERO DE IDENTIFICACIÓN";
+    private static final String TEXT_LABEL_SELECT_MODALITY = "SELECCIONE MODALIDAD DE LA CITA A AGENDAR";
+    private static final String PRESENCIAL = "PRESENCIAL";
+    private static final String RESIDENCIAL = "DOMICILIO";
+    private static final String MODALITY = "MODALITY";
+    private static final String TEXT_LABEL_SELECT_APPOINTMENT_CANCEL = "SELECCIONE LA CITA A CANCELAR";
+    private static final String TEXT_BUTTON_CANCEL = "CANCELAR";
+    private static final String ROUTE_BACKGROUND = ".\\resources\\image\\fondo.jpg";
     private AppointmentManager appointmentManager;
     private CancelListener listener;
     private JLabel jLabelCalendar;
@@ -34,38 +43,36 @@ public class JPanelCancelAppointment extends JPanel {
         listener = new CancelListener(this, appointmentManager);
 
         jLabelCalendar = new JLabel();
-        setUIComponentesLabel(jLabelCalendar, "CANCELAR CITA");
+        setUIComponentesLabel(jLabelCalendar, TEXT_LABEL_CANCEL);
         jLabelCalendar.setForeground(new Color(253, 130, 177));
         jLabelCalendar.setFont(new Font("Cambria", 1, 20));
 
         jLabelInfo = new JLabel();
-        setUIComponentesLabel(jLabelInfo,"Ingrese N° de identificación");
+        setUIComponentesLabel(jLabelInfo, TEXT_LABEL_ENTER_ID);
         jLabelInfo.setForeground(new Color(253, 130, 177));
         jLabelInfo.setFont(new Font("Cambria", 1, 20));
 
         jTextFieldId = new JTextField();
-        jTextFieldId.addActionListener(listener);
-        jTextFieldId.setActionCommand("verificar");
         this.add(jTextFieldId);
 
         jLabelDate = new JLabel();
-        setUIComponentesLabel(jLabelDate, "Selecciones modalidad de la cita a cancelar");
+        setUIComponentesLabel(jLabelDate, TEXT_LABEL_SELECT_MODALITY);
 
-        jcomboBoxTypeModality = new JComboBox<>(new String[]{"PRESENCIAL", "DOMICILIO"});
+        jcomboBoxTypeModality = new JComboBox<>(new String[]{PRESENCIAL, RESIDENCIAL});
         jcomboBoxTypeModality.setPreferredSize(new Dimension(200, 30));
-        jcomboBoxTypeModality.setActionCommand("MODALITY");
+        jcomboBoxTypeModality.setActionCommand(MODALITY);
         jcomboBoxTypeModality.addActionListener(listener);
         this.add(jcomboBoxTypeModality);
 
         jLabelHour = new JLabel();
-        setUIComponentesLabel(jLabelHour, "Seleccione la cita a cancelar");
+        setUIComponentesLabel(jLabelHour, TEXT_LABEL_SELECT_APPOINTMENT_CANCEL);
 
         jComboBoxHour = new JComboBox<>();
         jComboBoxHour.setPreferredSize(new Dimension(200, 30));
         this.add(jComboBoxHour);
 
         jButtonCancel = new JButton();
-        setUIComponentsJButton(jButtonCancel, "CANCELAR", CANCEL);
+        setUIComponentsJButton(jButtonCancel, TEXT_BUTTON_CANCEL, CANCEL);
     }
 
     public void putList(ArrayList<String> filter) {
@@ -99,7 +106,7 @@ public class JPanelCancelAppointment extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        ImageIcon icon = new ImageIcon(".\\resources\\image\\fondo.jpg");
+        ImageIcon icon = new ImageIcon(ROUTE_BACKGROUND);
         Image image = new ImageIcon(icon.getImage()).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);

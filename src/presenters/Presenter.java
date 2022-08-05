@@ -14,14 +14,8 @@ public class Presenter {
        jsonConvert = new JsonConvert();
         try {
             appointmentManager = new AppointmentManager(jsonConvert.readMedicalPresencial(), jsonConvert.readMedicalResidence());
-            jFrameMain = new JFrameMain(jsonConvert, this, appointmentManager);
+            jFrameMain = new JFrameMain(this, appointmentManager);
             initData();
-
-            /*.createSchedule(4, "Manuel Leon", "02/08/2022/05:00");
-            appointmentManager.createSchedule(4, "Lina Lopez", "02/08/2022/05:00");*/
-
-            //jsonConvert.saveMedicalAppoimentsPresencial(appointmentManager.listMedicalPresencial());
-            //jsonConvert.saveMedicalAppoimentsResidence(appointmentManager.listMedicalResidence());
 
             appointmentManager.scheduleAppointment("10025", "presencial", "02/08/2022/07:00");
             appointmentManager.scheduleAppointment("10025", "domicilio", "02/08/2022/06:00");

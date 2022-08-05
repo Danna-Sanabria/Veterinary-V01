@@ -3,7 +3,6 @@ package view.registerPanels;
 import presenters.Presenter;
 import presenters.listeners.MainListeners;
 import view.JFrameMain;
-
 import javax.swing.*;
 import java.awt.*;
 

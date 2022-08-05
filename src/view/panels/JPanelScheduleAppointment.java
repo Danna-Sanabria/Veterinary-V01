@@ -1,10 +1,7 @@
 package view.panels;
 
-import com.toedter.calendar.JDateChooser;
 import models.AppointmentManager;
-import presenters.JsonConvert;
 import presenters.listeners.MedicalAppointmentListener;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,15 +13,17 @@ public class JPanelScheduleAppointment extends JPanel {
     private static final String SELECT_HOUR = "Citas disponibles:";
     private static final String ROUTE_BACKGROUND = ".\\resources\\image\\fondo.jpg";
     private static final String AGENDAR_CITA = "       AGENDAR CITA         ";
-    private static final String SCHEDULE = "AGENDAR";
+    private static final String SCHEDULE = "AGENDAR_CITA";
+    private static final String MESSAGE_ENTER_ID = "INGRESE NUMERO DE IDENTIFICACIÓN";
+    private static final String PRESENCIAL = "PRESENCIAL";
+    private static final String RESIDENCIAL = "DOMICILIO";
+    private static final String MODALITY = "MODALITY";
     private MedicalAppointmentListener medicalAppointmentListener;
-    private Color color;
     private JLabel jLabelCalendar;
     private JLabel jLabelFind;
     private JLabel jLabelHour;
     private JLabel jLabelDate;
     private JLabel jLabelInfo;
-    private JDateChooser jDateChooser;
     private JComboBox<String> jComboBoxHour;
     private JButton jButtonSchedule;
     private JTextField jTextFieldId;
@@ -32,7 +31,7 @@ public class JPanelScheduleAppointment extends JPanel {
 
     public JPanelScheduleAppointment(AppointmentManager appointmentManager) {
         initComponents(appointmentManager);
-        color = new Color(253, 130, 177);
+        Color color = new Color(253, 130, 177);
     }
 
     private void initComponents(AppointmentManager appointmentManager) {
@@ -46,21 +45,19 @@ public class JPanelScheduleAppointment extends JPanel {
         jLabelCalendar.setFont(new Font("Cambria", 1, 20));
 
         jLabelInfo = new JLabel();
-        setUIComponentesLabel(jLabelInfo,"Ingrese N° de identificación");
+        setUIComponentesLabel(jLabelInfo, MESSAGE_ENTER_ID);
         jLabelInfo.setForeground(new Color(253, 130, 177));
         jLabelInfo.setFont(new Font("Cambria", 1, 20));
 
         jTextFieldId = new JTextField();
-        jTextFieldId.addActionListener(medicalAppointmentListener);
-        jTextFieldId.setActionCommand("verificar");
         this.add(jTextFieldId);
 
         jLabelDate = new JLabel();
         setUIComponentesLabel(jLabelDate, SELEC_DATE);
 
-        jcomboBoxTypeModality = new JComboBox<>(new String[]{"PRESENCIAL", "DOMICILIO"});
+        jcomboBoxTypeModality = new JComboBox<>(new String[]{PRESENCIAL, RESIDENCIAL});
         jcomboBoxTypeModality.setPreferredSize(new Dimension(200, 30));
-        jcomboBoxTypeModality.setActionCommand("modality");
+        jcomboBoxTypeModality.setActionCommand(MODALITY);
         jcomboBoxTypeModality.addActionListener(medicalAppointmentListener);
         this.add(jcomboBoxTypeModality);
 
@@ -128,6 +125,11 @@ public class JPanelScheduleAppointment extends JPanel {
     public String getTypeModality() {
         return (String) jcomboBoxTypeModality.getSelectedItem();
     }
+
+    public void messageInformation(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
 }
 
 

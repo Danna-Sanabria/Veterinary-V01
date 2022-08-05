@@ -40,7 +40,6 @@ public class JFrameInitUser extends JFrame {
     private JPanel jPanelRegister;
     private JPanel jPanelEnterDoctor;
     private JTabbedPane jTabbedPane;
-    private JPanel jpanelRegisterDoctor;
     private JTextField jFieldNameDoctor;
     private JTextField jFieldPassword;
     JComboBox<String> jComboBoxModality;

@@ -1,12 +1,7 @@
 package view.panels;
-
-
-// import presenter.listeners.HomeListener;
 import presenters.listeners.HomeListener;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class JPanelHome extends JPanel {
 

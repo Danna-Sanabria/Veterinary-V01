@@ -13,6 +13,11 @@ import java.io.IOException;
 
 public class InitSesionListener implements ActionListener {
 
+    private static final String MESSAGE_REGISTER_USER_SUCCESFUL = "USUARIO REGISTRADO CON EXITO";
+    private static final String VALIDATE = "VALIDATE";
+    private static final String EXIT = "EXIT";
+    private static final String REGISTER = "REGISTER";
+    private static final String VALIDATE_DOCTOR = "VALIDATE_DOCTOR";
     private JFrameInitUser jFrameInitUser;
     private AppointmentManager appointmentManager;
     private JsonConvert jsonConvert;
@@ -30,16 +35,16 @@ public class InitSesionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch (action) {
-            case "VALIDATE":
+            case VALIDATE:
                 validateUser();
                 break;
-            case "EXIT":
+            case EXIT:
                 jFrameInitUser.dispose();
                 break;
-            case "REGISTER":
+            case REGISTER:
                 registerUser();
                 break;
-            case "VALIDATE_DOCTOR":
+            case VALIDATE_DOCTOR:
                 validateDoctor();
                 break;
         }
@@ -49,7 +54,7 @@ public class InitSesionListener implements ActionListener {
         try {
 
             register();
-            jFrameInitUser.messageInformation("USUARIO REGISTRADO CON EXITO");
+            jFrameInitUser.messageInformation(MESSAGE_REGISTER_USER_SUCCESFUL);
         } catch (Exception ex) {
             jFrameInitUser.messageInformation(ex.getMessage());
         }

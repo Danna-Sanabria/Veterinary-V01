@@ -13,6 +13,7 @@ public class JPanelMenu extends JPanel {
     private static final String SHEDULE = "AGENDAR";
     private static final String SEARCH = "CONSULTAR";
     private static final String CANCEL = "CANCELAR";
+    private static final String TEXT_BUTTON_CANCEL = "<html><center>CANCELAR<html>";
 
     private Color color;
     public JPanelMenu(JPanelCardLayout jPanelCardLayout) {
@@ -43,7 +44,7 @@ public class JPanelMenu extends JPanel {
         setComponentButton(jButtonMedicalAppointments, SEARCH, SEARCH, listenerMenu);
 
         JButton jButtonOurs = new JButton();
-        setComponentButton(jButtonOurs, "<html><center> CANCELAR O MODIFICAR <html>", CANCEL, listenerMenu);
+        setComponentButton(jButtonOurs, TEXT_BUTTON_CANCEL, CANCEL, listenerMenu);
     }
 
     public void setComponentButton(JButton jButton, String text, String command, ListenerMenu listenerMenu) {

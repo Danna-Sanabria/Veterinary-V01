@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 
 public class ConsultAppointmentListener implements ActionListener {
 
-    private static final String CONSULT = "CONSULT";
+    private static final String CONSULT = "CONSULT_APPOINTMENT";
+    private static final String MESSAGE_ID_INVALID = "IDENTIFICACIÓN NO VALIDA";
     private JPanelSearchAppointment jPanelSearchAppointment;
     private AppointmentManager appointmentManager;
 
@@ -26,7 +27,7 @@ public class ConsultAppointmentListener implements ActionListener {
                 try {
                     jPanelSearchAppointment.setjTextAreaInformation(appointmentManager.getInformationAppointment(idUser) + "\n" + information);
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    jPanelSearchAppointment.messageInformation(MESSAGE_ID_INVALID);
                 }
 
         }

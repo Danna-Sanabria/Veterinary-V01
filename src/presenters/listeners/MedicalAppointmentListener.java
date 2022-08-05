@@ -16,6 +16,9 @@ public class MedicalAppointmentListener implements ActionListener {
     private static final String CANCEL = "CANCEL";
     public static final String APPOIMENT_CORRECT = "Cita agendada correctamente";
     public static final String DELETE_REGISTER = "Se eliminó el registro";
+    private static final String MODALITY = "MODALITY";
+    private static final String MESSAGE_ENTER_DATES = "INGRESE LOS DATOS CORRESPONDIENTES";
+    private static final String SCHEDULE_APPOINTMENT = "AGENDAR_CITA";
     private JPanelScheduleAppointment jPanelScheduleAppointment;
     private AppointmentManager appointmentManager;
 
@@ -29,19 +32,11 @@ public class MedicalAppointmentListener implements ActionListener {
         String action = e.getActionCommand();
         try {
             switch (action) {
-                case "CHECK" -> init();
-                case "modality" -> filterModality();
-                case "AGENDAR" -> schedule();
+                case MODALITY -> filterModality();
+                case SCHEDULE_APPOINTMENT -> schedule();
             }
 
         } catch (Exception exception) {
-            // JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-    }
-
-    public void init() throws Exception {
-        if (appointmentManager.checkUser(jPanelScheduleAppointment.getjTextFieldId())) {
-
         }
     }
 
@@ -57,7 +52,7 @@ public class MedicalAppointmentListener implements ActionListener {
                     jPanelScheduleAppointment.getTypeModality(), jPanelScheduleAppointment.getjComboBoxHour());
             filterModality();
         } catch (Exception e) {
-            e.printStackTrace();
+            jPanelScheduleAppointment.messageInformation(MESSAGE_ENTER_DATES);
         }
     }
 }
