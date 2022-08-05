@@ -1,6 +1,5 @@
 package view.panels;
 
-import com.toedter.calendar.JDateChooser;
 import models.AppointmentManager;
 import presenters.listeners.CancelListener;
 
@@ -12,13 +11,11 @@ public class JPanelCancelAppointment extends JPanel {
 
     private AppointmentManager appointmentManager;
     private CancelListener listener;
-    private Color color;
     private JLabel jLabelCalendar;
     private JLabel jLabelFind;
     private JLabel jLabelHour;
     private JLabel jLabelDate;
     private JLabel jLabelInfo;
-    private JDateChooser jDateChooser;
     private JComboBox<String> jComboBoxHour;
     private JButton jButtonCancel;
     private JTextField jTextFieldId;
@@ -67,7 +64,7 @@ public class JPanelCancelAppointment extends JPanel {
         this.add(jComboBoxHour);
 
         jButtonCancel = new JButton();
-        setUIComponentsJButton(jButtonCancel, "CANCELAR", "CANCELAR");
+        setUIComponentsJButton(jButtonCancel, "CANCELAR", "CANCEl");
     }
 
     public void putList(ArrayList<String> filter) {
@@ -108,8 +105,8 @@ public class JPanelCancelAppointment extends JPanel {
         super.paint(g);
     }
 
-    public void setjComboBoxHour(String stringOptions) {
-        jComboBoxHour.addItem(stringOptions);
+    public void messageInformation(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 
     public String getjComboBoxHour() {

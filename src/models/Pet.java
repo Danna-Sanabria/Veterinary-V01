@@ -18,40 +18,12 @@ public class Pet {
         return namePet;
     }
 
-    public void setNamePet(String namePet) {
-        this.namePet = namePet;
-    }
-
-    public String getIdPet() {
-        return idPet;
-    }
-
-    public void setIdPet(String idPet) {
-        this.idPet = idPet;
-    }
-
     public String getTypePet() {
         return typePet;
     }
 
-    public void setTypePet(String typePet) {
-        this.typePet = typePet;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getIdUser() {
         return user.getIdUser();
-    }
-
-    public String getNameUser() {
-        return user.getNameUser();
     }
 
     @Override

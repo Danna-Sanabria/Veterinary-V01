@@ -25,14 +25,6 @@ public class MedicalAppointment {
         return date;
     }
 
-    public String getNameOwner() {
-        return pet.getNameUser();
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
     public Pet getPet() {
         return pet;
     }
