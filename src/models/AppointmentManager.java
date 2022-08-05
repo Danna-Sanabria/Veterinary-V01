@@ -155,7 +155,6 @@ public class AppointmentManager {
         GregorianCalendar dateCita = transformStringToDate(date);
         MedicalAppointment medical = new MedicalAppointment(doc, pet, dateCita, true);
         MedicalAppointment medical2;
-
         if (modality.equalsIgnoreCase("PRESENCIAL")) {
             medical2 = medicalAppointmentsListPresential.exist(medical);
         } else {
@@ -163,7 +162,7 @@ public class AppointmentManager {
         }
         medical2.setPet(pet);
         medical2.setState(true);
-
+        System.out.println(getInformationAvl());
     }
 
     public MedicalAppointment getAppointment(String idUser) {
@@ -215,7 +214,6 @@ public class AppointmentManager {
                 }
             }
         }
-
     }
 
     public String getInformationAppointment(String idUser) throws Exception {
@@ -246,16 +244,19 @@ public class AppointmentManager {
         GregorianCalendar aux = transformStringToDate(date);
         Doctor doctor = foundDoctor(nameDoctor);
         for (int i = 0; i < numberOfAppointment; i++) {
-            aux.roll((Calendar.HOUR_OF_DAY),1);
-            if (doctor.getNameDoctor().equalsIgnoreCase("presencial")) {
-                medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, aux, false));
-            } else if (doctor.getNameDoctor().equalsIgnoreCase("domicilio")) {
-                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null, aux, false));
+            if (doctor.getTypeModality().equalsIgnoreCase("presencial")) {
+                System.out.println("--------");
+                medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
+            } else if (doctor.getTypeModality().equalsIgnoreCase("domicilio")) {
+                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null,validateDate(aux), false));
             }
+            aux.roll((Calendar.HOUR_OF_DAY),1);
         }
     }
 
     public GregorianCalendar validateDate(GregorianCalendar aux){
         return new GregorianCalendar(aux.get(Calendar.YEAR), aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH), aux.get(Calendar.HOUR_OF_DAY) + 1, 0);
     }
+
+
 }

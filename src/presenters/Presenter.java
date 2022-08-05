@@ -16,12 +16,15 @@ public class Presenter {
         jFrameMain = new JFrameMain(jsonConvert, this);
         initData();
         try {
-            appointmentManager.scheduleAppointment("10025","presencial","02/08/2022/05:00");
-            appointmentManager.scheduleAppointment("10025","presencial","15/10/2022/08:00");
-            appointmentManager.scheduleAppointment("10025","domicilio", "04/08/2022/04:00");
+            appointmentManager.createSchedule(4, "Manuel Leon", "02/08/2022/05:00");
+            appointmentManager.createSchedule(4, "Lina Lopez", "02/08/2022/05:00");
+            appointmentManager.createSchedule(4, "Lina Lopez", "03/08/2022/05:00");
+
+            appointmentManager.scheduleAppointment("10025","presencial","02/08/2022/07:00");
+            appointmentManager.scheduleAppointment("10025","domicilio", "02/08/2022/06:00");
             System.out.println(appointmentManager.getInformationAvl());
 
-            appointmentManager.cancelAppointment("10025","presencial","15/10/2022/08:00");
+            appointmentManager.cancelAppointment("10025","presencial","02/08/2022/07:00");
             System.out.println(appointmentManager.getInformationAvl());
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,13 +37,6 @@ public class Presenter {
 
             appointmentManager.registerDoctor("Manuel Leon", "1002525", "presencial");
             appointmentManager.registerDoctor("Lina Lopez", "1003636", "domicilio");
-
-            appointmentManager.createAppointment("presencial", "Manuel Leon","1002525","15/10/2022/08:00");
-            appointmentManager.createAppointment("presencial","Manuel Leon","1002525","02/08/2022/05:00");
-            appointmentManager.createAppointment("presencial","Manuel Leon","1002525","20/08/2022/05:00");
-            appointmentManager.createAppointment("domicilio","Lina Lopez","1003636","11/12/2022/01:00");
-            appointmentManager.createAppointment("domicilio","Lina Lopez","1003636","04/08/2022/04:00");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
