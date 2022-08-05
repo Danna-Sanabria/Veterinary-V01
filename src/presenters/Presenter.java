@@ -42,7 +42,13 @@ public class Presenter {
         }
     }
 
-    public void init() {
+    public void init(String caseValue) {
         JFrameInitUser initUser = new JFrameInitUser(appointmentManager, jsonConvert, jFrameMain);
+        if(caseValue.equalsIgnoreCase("Usuario")){
+            initUser.setjTabbedPane("INGRESAR",initUser.getjPanelEnter());
+            initUser.setjTabbedPane("REGISTRAR",initUser.getjPanelRegister());
+        }else{
+            initUser.setjTabbedPane("INGRESAR",initUser.getjPanelEnterDoctor());
+        }
     }
 }

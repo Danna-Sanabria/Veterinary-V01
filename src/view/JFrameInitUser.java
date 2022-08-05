@@ -30,17 +30,17 @@ public class JFrameInitUser extends JFrame {
 
     public JFrameInitUser(AppointmentManager appointmentManager, JsonConvert jsonConvert, JFrameMain jFrameMain) {
         super("lOG IN");
-        this.setSize(480,230);
+        this.setSize(480, 230);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        initComponents(appointmentManager,jsonConvert, jFrameMain);
+        initComponents(appointmentManager, jsonConvert, jFrameMain);
         this.setContentPane(jTabbedPane);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
     private void initComponents(AppointmentManager appointmentManager, JsonConvert jsonConvert, JFrameMain jFrameMain) {
-        InitSesionListener listener = new InitSesionListener(this,appointmentManager,jsonConvert, jFrameMain);
+        InitSesionListener listener = new InitSesionListener(this, appointmentManager, jsonConvert, jFrameMain);
 
         jFieldIdUserEnter = new JTextField();
         jFieldIdUser = new JTextField();
@@ -67,9 +67,9 @@ public class JFrameInitUser extends JFrame {
         jComboBoxModality = new JComboBox<>(new String[]{"PRESENCIAL", "DOMICILIO"});
 
         jPanelEnter = new JPanel();
-        jPanelEnter.setLayout(new GridLayout(2,4));
+        jPanelEnter.setLayout(new GridLayout(2, 4));
         jPanelEnter.add(jlabelidUserEnter);
-        initJfield(jPanelEnter,jFieldIdUserEnter, listener);
+        initJfield(jPanelEnter, jFieldIdUserEnter, listener);
         jButtonBack2.addActionListener(listener);
         jPanelEnter.add(jButtonBack2);
         jButtonBack2.setActionCommand("EXIT");
@@ -89,23 +89,23 @@ public class JFrameInitUser extends JFrame {
         jPanelEnter.add(jButtonValidate);
 
         jPanelRegister = new JPanel();
-        jPanelRegister.setLayout(new GridLayout(6,2));
+        jPanelRegister.setLayout(new GridLayout(6, 2));
 
         jPanelRegister.add(jlabelnamePet);
-        initJfield(jPanelRegister,jFieldNamePet,listener);
+        initJfield(jPanelRegister, jFieldNamePet, listener);
 
         jPanelRegister.add(jlabelidPet);
-        initJfield(jPanelRegister,jFieldIdPet,listener);
+        initJfield(jPanelRegister, jFieldIdPet, listener);
 
         jPanelRegister.add(jlabelTypePet);
         jComboBoxType.addActionListener(listener);
         jPanelRegister.add(jComboBoxType);
 
         jPanelRegister.add(jlabelnameUser);
-        initJfield(jPanelRegister,jFieldNameUser,listener);
+        initJfield(jPanelRegister, jFieldNameUser, listener);
 
         jPanelRegister.add(jlabelidUser);
-        initJfield(jPanelRegister,jFieldIdUser,listener);
+        initJfield(jPanelRegister, jFieldIdUser, listener);
 
         jButtonBack.addActionListener(listener);
         jButtonBack.setActionCommand("EXIT");
@@ -145,6 +145,7 @@ public class JFrameInitUser extends JFrame {
         jButtonValidateDoctor.addActionListener(listener);
 
         jButtonValidateDoctor.setActionCommand("validarDoctor");
+        jButtonValidateDoctor.addActionListener(listener);
         jButtonValidateDoctor.setBackground(new Color(220, 67, 134));
         jButtonValidateDoctor.setForeground(Color.WHITE);
         jButtonValidateDoctor.setBorderPainted(true);
@@ -153,11 +154,9 @@ public class JFrameInitUser extends JFrame {
         jPanelEnterDoctor.add(jButtonValidateDoctor);
 
         jTabbedPane = new JTabbedPane();
-        jTabbedPane.add("INGRESAR" , jPanelEnter);
-        jTabbedPane.add("REGISTRARSE",jPanelRegister);
     }
 
-    public void initJfield (JPanel jpanel, JTextField jTextField, ActionListener listener){
+    public void initJfield(JPanel jpanel, JTextField jTextField, ActionListener listener) {
         jpanel.add(jTextField);
         jTextField.addActionListener(listener);
         jTextField.setPreferredSize(new Dimension(200, 30));
@@ -187,8 +186,32 @@ public class JFrameInitUser extends JFrame {
         return (String) jComboBoxType.getSelectedItem();
     }
 
-    public void messageInformation(String message){
-        JOptionPane.showMessageDialog(null,message);
+    public String getjFieldNameDoctor() {
+        return jFieldNameDoctor.getText();
+    }
+
+    public String getjFieldPassword() {
+        return jFieldPassword.getText();
+    }
+
+    public JPanel getjPanelEnter() {
+        return jPanelEnter;
+    }
+
+    public JPanel getjPanelRegister() {
+        return jPanelRegister;
+    }
+
+    public JPanel getjPanelEnterDoctor() {
+        return jPanelEnterDoctor;
+    }
+
+    public void setjTabbedPane(String name, JPanel jpanel) {
+        jTabbedPane.add(name, jpanel);
+    }
+
+    public void messageInformation(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 
 }
