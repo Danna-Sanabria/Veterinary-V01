@@ -1,5 +1,7 @@
 package view.registerPanels;
 
+import com.toedter.calendar.JDateChooser;
+import models.AppointmentManager;
 import presenters.listeners.HomeRegisterListener;
 import view.JFrameMain;
 
@@ -10,18 +12,17 @@ public class JPanelHomeRegister extends JPanel {
 
     private HomeRegisterListener homeListener;
 
-    private JLabel jLabelSchedule;
-
-
+    private JButton jButtonObtainSchedule;
+    private JButton jButtonScheduleNewAppointment;
     private JButton jButtonBack;
     private JButton jButtonRegister;
+    private JDateChooser jDateChooser;
+    private JTextField jFielNumberAppointment;
+    private JLabel labelInformation;
 
-    private JList jList;
-    private JScrollPane scrollPane;
-
-    public JPanelHomeRegister(JFrameMain jFrameMain) {
-        setLayout(null);
-        homeListener = new HomeRegisterListener(this, jFrameMain);
+    public JPanelHomeRegister(JFrameMain jFrameMain, AppointmentManager appointmentManager) {
+        setLayout(new GridLayout(10,1));
+        homeListener = new HomeRegisterListener(this, jFrameMain, appointmentManager);
         initComponents();
         this.revalidate();
         this.repaint();
@@ -29,6 +30,28 @@ public class JPanelHomeRegister extends JPanel {
 
     private void initComponents() {
 
+        JLabel jLabelScheduleAppointment = new JLabel("AGENDA");
+        jButtonObtainSchedule = new JButton("VER AGENDA");
+        jButtonObtainSchedule.addActionListener(homeListener);
+        jButtonObtainSchedule.setActionCommand("verAgenda");
+        this.add(jButtonObtainSchedule);
+
+        labelInformation = new JLabel();
+        this.add(labelInformation);
+
+        JLabel labelSchedule = new JLabel("AGENDE NUEVAS CITAS");
+        this.add(labelSchedule);
+
+        jDateChooser = new JDateChooser();
+        jDateChooser.setPreferredSize(new Dimension(200, 30));
+        this.add(jDateChooser);
+
+        JLabel labelNumber = new JLabel("<html> <center> Indique numero de citas a agendar <html>");
+        this.add(labelNumber);
+
+        jFielNumberAppointment = new JTextField();
+        jFielNumberAppointment.setPreferredSize(new Dimension(200, 30));
+        this.add(jFielNumberAppointment);
 
         jButtonBack = new JButton("Volver");
         jButtonBack.setBounds(106, 558, 125, 40);
@@ -47,6 +70,18 @@ public class JPanelHomeRegister extends JPanel {
         jButtonRegister.setFont(new Font("Cambria", 3, 18));
         jButtonRegister.setForeground(Color.white);
         this.add(jButtonRegister);
+    }
+
+    public JDateChooser getjDateChooser() {
+        return jDateChooser;
+    }
+
+    public String getjFielNumberAppointment() {
+        return jFielNumberAppointment.getText();
+    }
+
+    public void setLabelInformation(String text) {
+        labelInformation.setText(text);
     }
 
     public void paint(Graphics g) {

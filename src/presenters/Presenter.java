@@ -13,7 +13,7 @@ public class Presenter {
     public Presenter() {
         JsonConvert jsonConvert = new JsonConvert();
         appointmentManager = new AppointmentManager();
-        jFrameMain = new JFrameMain(jsonConvert, this);
+        jFrameMain = new JFrameMain(jsonConvert, this,appointmentManager);
         initData();
         try {
             appointmentManager.scheduleAppointment("10025","presencial","02/08/2022/05:00");

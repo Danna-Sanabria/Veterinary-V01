@@ -7,10 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AppointmentManager {
-    private static final String YY_MM_DD = "yy-MM-dd";
-    private static final String MESSAGE_VALIDATE_DATE = "Debe ingresar una fecha mayor o igual a la actual ";
-    private static final String MESSAGE_VALIDATE_APPOINTMENT = "No hay citas disponibles para este día";
-    private static final String MESSAGE_DONT_FIND_ID = "Este Id no se encuentra relacionado a ningun registro";
+
     private final GregorianCalendar date;
     private ArrayList<Pet> clientsRegister;
     private ArrayList<Doctor> doctorList;
@@ -200,6 +197,21 @@ public class AppointmentManager {
             data.append(medical.dateformat()).append(medical.isState()).append(",,");
         }
         return data.toString();
+    }
+
+    public String getInformationOfSchedule(){
+        String aux = "";
+        for (MedicalAppointment medical: medicalAppointmentsListPresential.getListData()) {
+            if(medical.isState()) {
+                aux += "<html>" + medical.dateformat() + " - " + medical.getPet().getNamePet() + " - " + medical.getPet().getTypePet() + "<br> <html>";
+            }
+        }
+        for (MedicalAppointment medical2: medicalAppointmentsListresidency.getListData()) {
+            if(medical2.isState()) {
+                aux += "<html>" + medical2.dateformat() + " - " + medical2.getPet().getNamePet() + " - " + medical2.getPet().getTypePet() + "<br> <html>";
+            }
+        }
+        return aux;
     }
 
     public void cancelAppointment(String idUser, String modality, String date) {

@@ -1,5 +1,6 @@
 package view;
 
+import models.AppointmentManager;
 import presenters.JsonConvert;
 import presenters.Presenter;
 import view.panels.*;
@@ -16,20 +17,20 @@ public class JFrameMain extends JFrame {
     private CardLayout cardLayout;
     private JPanel panel;
 
-    public JFrameMain(JsonConvert jsonConvert, Presenter presenter) {
+    public JFrameMain(JsonConvert jsonConvert, Presenter presenter, AppointmentManager appointmentManager) {
         super("INICIO");
-        this.setSize(470, 650);
+        this.setSize(470, 700);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         this.setVisible(true);
-        initComponents(jsonConvert, presenter);
+        initComponents(jsonConvert, presenter, appointmentManager);
         revalidate();
         repaint();
     }
 
-    public void initComponents(JsonConvert jsonConvert, Presenter presenter) {
-        jPanelHomeRegister = new JPanelHomeRegister(this); //CUANDO PREISONA MEDICO
+    public void initComponents(JsonConvert jsonConvert, Presenter presenter, AppointmentManager appointmentManager) {
+        jPanelHomeRegister = new JPanelHomeRegister(this, appointmentManager );
         jPanelHomeOptions = new JPanelHomeOptions(this, presenter);
         addContentToPanel();
     }

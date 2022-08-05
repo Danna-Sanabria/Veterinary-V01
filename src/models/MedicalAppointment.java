@@ -49,6 +49,9 @@ public class MedicalAppointment {
         return dayS + "/" + monthS + "/" + date.get(Calendar.YEAR)  + "/" + hourS + ":00";
     }
 
+    public String getInformationschedule(){
+        return dateformat() + "-" + getPet() + "\n";
+    }
     public void setState(boolean state) {
         this.state = state;
     }
