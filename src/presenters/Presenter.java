@@ -25,8 +25,6 @@ public class Presenter {
 
             appointmentManager.scheduleAppointment("10025", "presencial", "02/08/2022/07:00");
             appointmentManager.scheduleAppointment("10025", "domicilio", "02/08/2022/06:00");
-            System.out.println(appointmentManager.getInformationAvl());
-
             appointmentManager.cancelAppointment("10025", "presencial", "02/08/2022/07:00");
             System.out.println(appointmentManager.getInformationAvl());
         } catch (Exception e) {
@@ -37,6 +35,8 @@ public class Presenter {
     public void initData(){
         try {
             appointmentManager.registerUser("bronco", "2222", "perro", "danna", "10025");
+            appointmentManager.registerUser("Victoria", "1111", "Gato", "David", "10023");
+            jsonConvert.saveListPet(appointmentManager.getListPet());
             appointmentManager.registerDoctor("Manuel Leon", "1002525", "presencial");
             appointmentManager.registerDoctor("Lina Lopez", "1003636", "domicilio");
         } catch (Exception e) {
