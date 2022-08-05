@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JFrameMain extends JFrame {
+    public static final String MESSAGE_INIT = "INICIO";
     private JPanelMain jPanelMain;
     private JPanelHomeRegister jPanelHomeRegister;
     private JPanelHomeOptions jPanelHomeOptions;
@@ -18,7 +19,7 @@ public class JFrameMain extends JFrame {
     private JPanel panel;
 
     public JFrameMain(JsonConvert jsonConvert, Presenter presenter, AppointmentManager appointmentManager) {
-        super("INICIO");
+        super(MESSAGE_INIT);
         this.setSize(470, 700);
         this.setLocationRelativeTo(null);
         this.setResizable(false);

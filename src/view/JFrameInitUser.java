@@ -12,6 +12,23 @@ import java.awt.event.ActionListener;
 
 public class JFrameInitUser extends JFrame {
 
+    public static final String ACTION_COMMAND_EXIT = "EXIT";
+    public static final String ACTION_COMMAND_REGISTER = "REGISTER";
+    public static final String ACTION_COMMAND_VALIDATE_DOCTOR = "VALIDATE_DOCTOR";
+    public static final String MESSAGE_INPUT_TEXT = "Ingrese nombre del propietario";
+    public static final String MESAG_INPUT_INFORMATION = "<html> <center>Ingrese identificación del propietario para ingresar<html>";
+    public static final String MESSAGE_INPUT_ID_USER = "<html> <center>Ingrese identificación del propietario<html>";
+    public static final String MESSAGE_INPUT_NAME_PET = "Ingrese nombre de la mascota";
+    public static final String MESSAGE_INPUT_ID_PET = "Ingrese identificacion de la mascota";
+    public static final String MESSAGE_SELECT_TYPE_PET = "Seleccione tipo de mascota";
+    public static final String MESSAGE_INPUT_NAME = "<html> <center>Digite nombre para ingresar<html>";
+    public static final String MESSAGE_ENTER_PASSWORD = "<html> <center>Ingrese su contraseña <html>";
+    public static final String TEXT_BUTTON_EXIT = "SALIR";
+    public static final String TEXT_BUTTON_REGISTER = "GUARDAR";
+    public static final String TEXT_BUTTON_VALIDATE = "VALIDATE";
+    public static final String TEXT_BUTTON_VALIDATE_DOCTOR = "VALIDAR_DOCTOR";
+    public static final String[] OPTIONS_PETS = {"Gato", "Perro"};
+    public static final String[] OPTIONS_TYPE_APPOINTMENT = {"PRESENCIAL", "DOMICILIO"};
     JTextField jFieldIdUserEnter;
     JTextField jFieldIdUser;
     JTextField jFieldNameUser;
@@ -49,22 +66,22 @@ public class JFrameInitUser extends JFrame {
         jFieldIdPet = new JTextField();
         jFieldPassword = new JTextField();
         jFieldNameDoctor = new JTextField();
-        JLabel jlabelnameUser = new JLabel("Ingrese nombre del propietario");
-        JLabel jlabelidUserEnter = new JLabel("<html> <center>Ingrese identificación del propietario para ingresar<html>");
-        JLabel jlabelidUser = new JLabel("<html> <center>Ingrese identificación del propietario<html>");
-        JLabel jlabelnamePet = new JLabel("Ingrese nombre de la mascota");
-        JLabel jlabelidPet = new JLabel("Ingrese identificacion de la mascota");
-        JLabel jlabelTypePet = new JLabel("Seleccione tipo de mascota");
-        JLabel jlabelnameDoctor = new JLabel("<html> <center>Digite nombre para ingresar<html>");
-        JLabel jlabelPasswordDoctor = new JLabel("<html> <center>Ingrese su contraseña <html>");
-        JButton jButtonBack = new JButton("SALIR");
-        JButton jButtonRegister = new JButton("GUARDAR");
-        JButton jButtonBack2 = new JButton("SALIR");
-        JButton jButtonValidate = new JButton("VALIDAR");
-        JButton jButtonBack3 = new JButton("SALIR");
-        JButton jButtonValidateDoctor = new JButton("VALIDAR_DOCTOR");
-        jComboBoxType = new JComboBox<>(new String[]{"Gato", "Perro"});
-        jComboBoxModality = new JComboBox<>(new String[]{"PRESENCIAL", "DOMICILIO"});
+        JLabel jlabelnameUser = new JLabel(MESSAGE_INPUT_TEXT);
+        JLabel jlabelidUserEnter = new JLabel(MESAG_INPUT_INFORMATION);
+        JLabel jlabelidUser = new JLabel(MESSAGE_INPUT_ID_USER);
+        JLabel jlabelnamePet = new JLabel(MESSAGE_INPUT_NAME_PET);
+        JLabel jlabelidPet = new JLabel(MESSAGE_INPUT_ID_PET);
+        JLabel jlabelTypePet = new JLabel(MESSAGE_SELECT_TYPE_PET);
+        JLabel jlabelnameDoctor = new JLabel(MESSAGE_INPUT_NAME);
+        JLabel jlabelPasswordDoctor = new JLabel(MESSAGE_ENTER_PASSWORD);
+        JButton jButtonBack = new JButton(TEXT_BUTTON_EXIT);
+        JButton jButtonRegister = new JButton(TEXT_BUTTON_REGISTER);
+        JButton jButtonBack2 = new JButton(TEXT_BUTTON_EXIT);
+        JButton jButtonValidate = new JButton(TEXT_BUTTON_VALIDATE);
+        JButton jButtonBack3 = new JButton(TEXT_BUTTON_EXIT);
+        JButton jButtonValidateDoctor = new JButton(TEXT_BUTTON_VALIDATE_DOCTOR);
+        jComboBoxType = new JComboBox<>(OPTIONS_PETS);
+        jComboBoxModality = new JComboBox<>(OPTIONS_TYPE_APPOINTMENT);
 
         jPanelEnter = new JPanel();
         jPanelEnter.setLayout(new GridLayout(2, 4));
@@ -72,7 +89,7 @@ public class JFrameInitUser extends JFrame {
         initJfield(jPanelEnter, jFieldIdUserEnter, listener);
         jButtonBack2.addActionListener(listener);
         jPanelEnter.add(jButtonBack2);
-        jButtonBack2.setActionCommand("EXIT");
+        jButtonBack2.setActionCommand(ACTION_COMMAND_EXIT);
         jButtonBack2.setBackground(new Color(220, 67, 134));
         jButtonBack2.setForeground(Color.WHITE);
         jButtonBack2.setBorderPainted(true);
@@ -80,7 +97,7 @@ public class JFrameInitUser extends JFrame {
         jButtonBack2.setAlignmentX(Component.CENTER_ALIGNMENT);
         jButtonValidate.addActionListener(listener);
 
-        jButtonValidate.setActionCommand("validar");
+        jButtonValidate.setActionCommand(TEXT_BUTTON_VALIDATE);
         jButtonValidate.setBackground(new Color(220, 67, 134));
         jButtonValidate.setForeground(Color.WHITE);
         jButtonValidate.setBorderPainted(true);
@@ -108,7 +125,7 @@ public class JFrameInitUser extends JFrame {
         initJfield(jPanelRegister, jFieldIdUser, listener);
 
         jButtonBack.addActionListener(listener);
-        jButtonBack.setActionCommand("EXIT");
+        jButtonBack.setActionCommand(ACTION_COMMAND_EXIT);
         jButtonBack.setBackground(new Color(220, 67, 134));
         jButtonBack.setForeground(Color.WHITE);
         jButtonBack.setBorderPainted(true);
@@ -122,7 +139,7 @@ public class JFrameInitUser extends JFrame {
         jButtonRegister.setFont(new Font("Cambria", 0, 12));
         jButtonRegister.setAlignmentX(Component.CENTER_ALIGNMENT);
         jButtonRegister.addActionListener(listener);
-        jButtonRegister.setActionCommand("REGISTER");
+        jButtonRegister.setActionCommand(ACTION_COMMAND_REGISTER);
         jPanelRegister.add(jButtonRegister);
 
         jPanelEnterDoctor = new JPanel();
@@ -136,7 +153,7 @@ public class JFrameInitUser extends JFrame {
 
         jButtonBack3.addActionListener(listener);
         jPanelEnterDoctor.add(jButtonBack3);
-        jButtonBack3.setActionCommand("EXIT");
+        jButtonBack3.setActionCommand(ACTION_COMMAND_EXIT);
         jButtonBack3.setBackground(new Color(220, 67, 134));
         jButtonBack3.setForeground(Color.WHITE);
         jButtonBack3.setBorderPainted(true);
@@ -144,7 +161,7 @@ public class JFrameInitUser extends JFrame {
         jButtonBack3.setAlignmentX(Component.CENTER_ALIGNMENT);
         jButtonValidateDoctor.addActionListener(listener);
 
-        jButtonValidateDoctor.setActionCommand("validarDoctor");
+        jButtonValidateDoctor.setActionCommand(ACTION_COMMAND_VALIDATE_DOCTOR);
         jButtonValidateDoctor.addActionListener(listener);
         jButtonValidateDoctor.setBackground(new Color(220, 67, 134));
         jButtonValidateDoctor.setForeground(Color.WHITE);

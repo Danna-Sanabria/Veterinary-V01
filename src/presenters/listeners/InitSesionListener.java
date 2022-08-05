@@ -30,7 +30,7 @@ public class InitSesionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch (action) {
-            case "validar":
+            case "VALIDATE":
                 validateUser();
                 break;
             case "EXIT":
@@ -39,7 +39,7 @@ public class InitSesionListener implements ActionListener {
             case "REGISTER":
                 registerUser();
                 break;
-            case "validarDoctor":
+            case "VALIDATE_DOCTOR":
                 validateDoctor();
                 break;
         }
