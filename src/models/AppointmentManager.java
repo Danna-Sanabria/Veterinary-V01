@@ -172,10 +172,6 @@ public class AppointmentManager {
         System.out.println(getInformationAvl());
     }
 
-    public MedicalAppointment getAppointment(String idUser) {
-        return null;
-    }
-
     public ArrayList<String> consultAppointmentsSchedule(String idUser) {
         ArrayList<String> auxList = new ArrayList<>();
         ArrayList<MedicalAppointment> medical = medicalAppointmentsListPresential.getListData();
@@ -264,6 +260,4 @@ public class AppointmentManager {
     public GregorianCalendar validateDate(GregorianCalendar aux){
         return new GregorianCalendar(aux.get(Calendar.YEAR), aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH), aux.get(Calendar.HOUR_OF_DAY) + 1, 0);
     }
-
-
 }

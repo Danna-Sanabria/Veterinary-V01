@@ -94,12 +94,17 @@ public class InitSesionListener implements ActionListener {
         jFrameMain.navigateToHomeRegister();
     }
 
-    public void register() throws Exception {
+    public void register() {
         String namePet = jFrameInitUser.getjFieldNamePet().getText();
         String idPet = jFrameInitUser.getjFieldIdPet().getText();
         String typePet = jFrameInitUser.getjComboBoxType();
         String nameOwner = jFrameInitUser.getjFieldNameUser().getText();
         String idUser = jFrameInitUser.getjFieldIdUser().getText();
-        appointmentManager.registerUser(namePet, idPet, typePet, nameOwner, idUser);
+        try {
+            appointmentManager.checkPerson(idUser);
+            appointmentManager.registerUser(namePet, idPet, typePet, nameOwner, idUser);
+        } catch (Exception e) {
+            jFrameInitUser.messageInformation(e.getMessage());
+        }
     }
 }
