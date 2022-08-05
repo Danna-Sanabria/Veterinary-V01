@@ -17,6 +17,7 @@ public class InitSesionListener implements ActionListener {
     private AppointmentManager appointmentManager;
     private JsonConvert jsonConvert;
     private JFrameMain jFrameMain;
+    private String nameUser;
 
     public InitSesionListener(JFrameInitUser jFrameInitUser, AppointmentManager appointmentManager, JsonConvert jsonConvert, JFrameMain jFrameMain) {
         this.jFrameInitUser = jFrameInitUser;
@@ -46,6 +47,7 @@ public class InitSesionListener implements ActionListener {
 
     private void registerUser() {
         try {
+
             register();
             jFrameInitUser.messageInformation("USUARIO REGISTRADO CON EXITO");
         } catch (Exception ex) {
@@ -67,7 +69,7 @@ public class InitSesionListener implements ActionListener {
     private void validateDoctor() {
         try {
             if (appointmentManager.checkDoctor(jFrameInitUser.getjFieldNameDoctor(), jFrameInitUser.getjFieldPassword())) {
-                initFramemedical();
+                initFramemedical(jFrameInitUser.getjFieldNameDoctor());
                 jFrameInitUser.dispose();
             }
         } catch (Exception ex) {
@@ -77,8 +79,8 @@ public class InitSesionListener implements ActionListener {
 
     public void initPageMedicalAppointment(JsonConvert jsonConvert) throws IOException {
         JPanelHome jPanelHome = new JPanelHome();
-        JPanelScheduleAppointment jPanelScheduleAppointment = new JPanelScheduleAppointment(appointmentManager, jsonConvert);
-        JPanelSearchAppointment jPanelSearchAppointment = new JPanelSearchAppointment(appointmentManager, jsonConvert);
+        JPanelScheduleAppointment jPanelScheduleAppointment = new JPanelScheduleAppointment(appointmentManager);
+        JPanelSearchAppointment jPanelSearchAppointment = new JPanelSearchAppointment(appointmentManager);
         JPanelCancelAppointment jPanelCancelAppointment = new JPanelCancelAppointment(appointmentManager);
         JPanelCardLayout jPanelCardLayout = new JPanelCardLayout(jPanelHome, jPanelScheduleAppointment, jPanelSearchAppointment, jPanelCancelAppointment);
         JPanelMenu jPanelMenu = new JPanelMenu(jPanelCardLayout);
@@ -90,8 +92,8 @@ public class InitSesionListener implements ActionListener {
         return appointmentManager.checkUser(jFrameInitUser.getjFieldIdUserEnter().getText());
     }
 
-    public void initFramemedical() {
-        jFrameMain.navigateToHomeRegister();
+    public void initFramemedical(String nameDoctor) {
+        jFrameMain.navigateToHomeRegister(nameDoctor);
     }
 
     public void register() {

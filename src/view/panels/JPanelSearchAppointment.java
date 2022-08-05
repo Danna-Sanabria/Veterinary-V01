@@ -10,15 +10,13 @@ import java.awt.*;
 
 public class JPanelSearchAppointment extends JPanel {
     private AppointmentManager appointmentManager;
-    private JsonConvert jsonConvert;
     private ConsultAppointmentListener listener;
     private JTextArea jTextAreaInformation;
     private JTextField jTextFieldId;
 
 
-    public JPanelSearchAppointment(AppointmentManager appointmentManager, JsonConvert jsonConvert) {
+    public JPanelSearchAppointment(AppointmentManager appointmentManager) {
         this.appointmentManager = appointmentManager;
-        this.jsonConvert = jsonConvert;
         listener = new ConsultAppointmentListener(this,appointmentManager);
         initComponents();
     }

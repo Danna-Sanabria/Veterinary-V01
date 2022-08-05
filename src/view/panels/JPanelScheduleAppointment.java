@@ -30,15 +30,15 @@ public class JPanelScheduleAppointment extends JPanel {
     private JTextField jTextFieldId;
     private JComboBox<String> jcomboBoxTypeModality;
 
-    public JPanelScheduleAppointment(AppointmentManager appointmentManager, JsonConvert jsonConvert) {
-        initComponents(appointmentManager, jsonConvert);
+    public JPanelScheduleAppointment(AppointmentManager appointmentManager) {
+        initComponents(appointmentManager);
         color = new Color(253, 130, 177);
     }
 
-    private void initComponents(AppointmentManager appointmentManager, JsonConvert jsonConvert) {
+    private void initComponents(AppointmentManager appointmentManager) {
         this.setLayout(new GridLayout(12,1));
         this.setSize(1034, 515);
-        medicalAppointmentListener = new MedicalAppointmentListener(this, appointmentManager, jsonConvert);
+        medicalAppointmentListener = new MedicalAppointmentListener(this, appointmentManager);
 
         jLabelCalendar = new JLabel();
         setUIComponentesLabel(jLabelCalendar, SCHEDULE_APPOINTMENT);

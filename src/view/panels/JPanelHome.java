@@ -2,6 +2,8 @@ package view.panels;
 
 
 // import presenter.listeners.HomeListener;
+import presenters.listeners.HomeListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -12,13 +14,13 @@ public class JPanelHome extends JPanel {
     private JButton jButtonBack;
     private JLabel jLabelImage;
     private ImageIcon icon;
-//    private HomeListener listener;
+    private HomeListener homeListener;
 
-    public JPanelHome() throws IOException {
-      //  listener = new HomeListener(this);
+    public JPanelHome() {
         GridBagLayout gridBagLayout = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         this.setLayout(gridBagLayout);
+        homeListener = new HomeListener(this);
 
         jLabelImage = new JLabel();
         jLabelImage.setBorder(null);
@@ -63,7 +65,7 @@ public class JPanelHome extends JPanel {
         button.setFocusPainted(false);
         button.setBorderPainted(false);
         button.setActionCommand(command);
-      //  button.addActionListener(listener);
+       button.addActionListener(homeListener);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         icon = new ImageIcon(".\\resources\\image\\" + nameFile + ".png");
         button.setIcon(new ImageIcon(icon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));

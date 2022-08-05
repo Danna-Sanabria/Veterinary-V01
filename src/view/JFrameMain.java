@@ -51,7 +51,8 @@ public class JFrameMain extends JFrame {
         cardLayout.show(panel, "register");
     }
 
-    public void navigateToHomeRegister() {
+    public void navigateToHomeRegister(String nameDoctor) {
+        jPanelHomeRegister.setNameDoctor(nameDoctor);
         cardLayout.show(panel, "homeRegister");
     }
 

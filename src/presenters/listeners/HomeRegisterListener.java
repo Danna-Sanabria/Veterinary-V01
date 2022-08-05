@@ -5,6 +5,8 @@ import view.JFrameMain;
 import view.registerPanels.JPanelHomeRegister;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeRegisterListener implements ActionListener{
 
@@ -27,12 +29,24 @@ public class HomeRegisterListener implements ActionListener{
             case "verAgenda":
                 jPanelHomeRegister.setLabelInformation(appointmentManager.getInformationOfSchedule());
                 break;
-            case REGISTER:
-                jFrameMain.navigateToRegister();
+            case "agendar":
+                schedule();
                 break;
             case BACK_OPTION:
                 jFrameMain.navigateToHome();
                 break;
+        }
+    }
+
+    private void schedule() {
+        try {
+            Date date = jPanelHomeRegister.getjDateChooser();
+            Calendar dateG = Calendar.getInstance();
+            dateG.setTime(date);
+            String aux = appointmentManager.dateformat(dateG.get(Calendar.YEAR), dateG.get(Calendar.MONTH), dateG.get(Calendar.DAY_OF_MONTH), jPanelHomeRegister.getjComboBoxHourStart());
+            appointmentManager.createSchedule(jPanelHomeRegister.getjFielNumberAppointment(), jPanelHomeRegister.getNameDoctor(),aux);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

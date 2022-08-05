@@ -11,17 +11,10 @@ public class Presenter {
     JFrameMain jFrameMain;
 
     public Presenter() {
-<<<<<<< HEAD
-        JsonConvert jsonConvert = new JsonConvert();
-        appointmentManager = new AppointmentManager();
-        jFrameMain = new JFrameMain(jsonConvert, this,appointmentManager);
-        initData();
-=======
->>>>>>> 47c2b8dd1d0e926135ea0312b30b4ec7c600aa4a
         try {
             JsonConvert jsonConvert = new JsonConvert();
             appointmentManager = new AppointmentManager(jsonConvert.readMedicalPresencial(), jsonConvert.readMedicalResidence());
-            jFrameMain = new JFrameMain(jsonConvert, this);
+            jFrameMain = new JFrameMain(jsonConvert, this, appointmentManager);
             initData();
 
             /*.createSchedule(4, "Manuel Leon", "02/08/2022/05:00");

@@ -18,12 +18,10 @@ public class MedicalAppointmentListener implements ActionListener {
     public static final String DELETE_REGISTER = "Se eliminó el registro";
     private JPanelScheduleAppointment jPanelScheduleAppointment;
     private AppointmentManager appointmentManager;
-    private JsonConvert jsonConvert;
 
-    public MedicalAppointmentListener(JPanelScheduleAppointment jPanelScheduleAppointment, AppointmentManager appointmentManager, JsonConvert jsonConvert) {
+    public MedicalAppointmentListener(JPanelScheduleAppointment jPanelScheduleAppointment, AppointmentManager appointmentManager) {
         this.appointmentManager = appointmentManager;
         this.jPanelScheduleAppointment = jPanelScheduleAppointment;
-        this.jsonConvert = jsonConvert;
     }
 
     @Override

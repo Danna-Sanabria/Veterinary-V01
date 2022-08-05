@@ -135,15 +135,6 @@ public class AppointmentManager {
         return aux;
     }
 
-    public void createAppointment(String modality, String nameDoctor, String iddoctor, String date) throws
-            Exception {
-        if (modality.equalsIgnoreCase("presencial")) {
-            medicalAppointmentsListPresential.insert(new MedicalAppointment(new Doctor(nameDoctor, iddoctor, modality), null, transformStringToDate(date), false));
-        } else if (modality.equalsIgnoreCase("domicilio")) {
-            medicalAppointmentsListresidency.insert(new MedicalAppointment(new Doctor(nameDoctor, iddoctor, modality), null, transformStringToDate(date), false));
-        }
-    }
-
     public Doctor getModality(String modality) {
         for (Doctor doctor : doctorList) {
             if (doctor.getTypeModality().equalsIgnoreCase(modality)) {
@@ -151,6 +142,13 @@ public class AppointmentManager {
             }
         }
         return null;
+    }
+
+    public String dateformat(int year, int month, int day, int hour) {
+        String dayS = (day >= 10) ? day + "" : "0" + day;
+        String monthS = (month + 1 >= 10) ? (month + 1) + "" : "0" + (month + 1);
+        String hourS = (hour >= 10) ? hour + "" : "0" + hour;
+        return dayS + "/" + monthS + "/" + year  + "/" + hourS + ":00";
     }
 
     public GregorianCalendar transformStringToDate(String date) {
