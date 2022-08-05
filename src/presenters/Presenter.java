@@ -11,8 +11,8 @@ public class Presenter {
     JFrameMain jFrameMain;
 
     public Presenter() {
+       jsonConvert = new JsonConvert();
         try {
-            JsonConvert jsonConvert = new JsonConvert();
             appointmentManager = new AppointmentManager(jsonConvert.readMedicalPresencial(), jsonConvert.readMedicalResidence());
             jFrameMain = new JFrameMain(jsonConvert, this, appointmentManager);
             initData();
