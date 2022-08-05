@@ -2,7 +2,6 @@ package presenters.listeners;
 
 import models.AppointmentManager;
 import view.panels.JPanelCancelAppointment;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ public class CancelListener implements ActionListener {
     private static final String MODALITY = "MODALITY";
     private static final String MESSAGE_CANCEL_SUCCESFULL = "CITA CANCELADA CON EXITO";
     private static final String CANCEL = "CANCEL";
+    private static final String MESSAGE_ENTER_DATES = "POR FAVOR INGRESE LOS DATOS CORRESPONDIENTES";
     private JPanelCancelAppointment jPanelCancelAppointment;
     private AppointmentManager appointmentManager;
 
@@ -26,10 +26,7 @@ public class CancelListener implements ActionListener {
         try {
             switch (action) {
                 case MODALITY -> filterSchedule();
-                case CANCEL -> {
-                    cancelAppointment();
-                    jPanelCancelAppointment.messageInformation(MESSAGE_CANCEL_SUCCESFULL);
-                }
+                case CANCEL -> cancelAppointment();
             }
 
         } catch (Exception exception) {
@@ -45,8 +42,10 @@ public class CancelListener implements ActionListener {
     public void cancelAppointment(){
         try {
             appointmentManager.cancelAppointment(jPanelCancelAppointment.getjTextFieldId(),jPanelCancelAppointment.getTypeModality(),jPanelCancelAppointment.getjComboBoxHour());
+            jPanelCancelAppointment.messageInformation(MESSAGE_CANCEL_SUCCESFULL);
+
         } catch (Exception e) {
-            e.printStackTrace();
+            jPanelCancelAppointment.messageInformation(MESSAGE_ENTER_DATES);
         }
     }
 }

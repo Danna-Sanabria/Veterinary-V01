@@ -11,6 +11,16 @@ import java.util.Date;
 
 public class JPanelHomeRegister extends JPanel {
 
+    private static final String SCHEDULE = "AGENDAR";
+    private static final String BACK = "VOLVER";
+    private static final String BACK1 = "BACK";
+    private static final String ROUTE_BACKGROUNDS = ".\\resources\\image\\fondo.jpg";
+    private static final String MESSAGE_SCHEDULE = "INFORMACIÓN CITAS PROGRAMADAS";
+    private static final String SEE_SCHEDULE = "VER AGENDA";
+    private static final String SEE_SHEDULE = "VER_AGENDA";
+    private static final String MESSAGE_NEW_APPOINTMENTS = "AGENDE NUEVAS CITAS";
+    private static final String MESSAGE_SELECT_HOUR = "<html> <center> SELECCIONE LA HORA A PARTIR DE LA CUAL DESEA AGENDAR CITAS <html>";
+    private static final String MESSAGE_SELECT_QUANTITY_APPOINTMENTS = "<html> <center>INDIQUE NÚMERO DE CITAS<html>";
     private HomeRegisterListener homeListener;
     private JButton jButtonObtainSchedule;
     private JButton jButtonScheduleNewAppointment;
@@ -32,14 +42,14 @@ public class JPanelHomeRegister extends JPanel {
 
     private void initComponents() {
 
-        JLabel jLabelScheduleAppointment = new JLabel("INFORMACIÓN AGENDA PROGRAMADA",SwingConstants.CENTER);
+        JLabel jLabelScheduleAppointment = new JLabel(MESSAGE_SCHEDULE,SwingConstants.CENTER);
         jLabelScheduleAppointment.setFont(new Font("Cambria", 1, 15));
         jLabelScheduleAppointment.setForeground(new Color(220, 67, 134));
         this.add(jLabelScheduleAppointment);
 
-        jButtonObtainSchedule = new JButton("VER AGENDA");
+        jButtonObtainSchedule = new JButton(SEE_SCHEDULE);
         jButtonObtainSchedule.addActionListener(homeListener);
-        jButtonObtainSchedule.setActionCommand("verAgenda");
+        jButtonObtainSchedule.setActionCommand(SEE_SHEDULE);
         jButtonObtainSchedule.setBackground(new Color(49, 153, 139));
         jButtonObtainSchedule.setFont(new Font("Cambria", 3, 18));
         jButtonObtainSchedule.setForeground(Color.white);
@@ -50,7 +60,7 @@ public class JPanelHomeRegister extends JPanel {
         labelInformation.setForeground(new Color(220, 67, 134));
         this.add(labelInformation);
 
-        JLabel labelSchedule = new JLabel("AGENDE NUEVAS CITAS",SwingConstants.CENTER);
+        JLabel labelSchedule = new JLabel(MESSAGE_NEW_APPOINTMENTS,SwingConstants.CENTER);
         labelSchedule.setFont(new Font("Cambria", 1, 15));
         labelSchedule.setForeground(new Color(220, 67, 134));
         this.add(labelSchedule);
@@ -59,7 +69,7 @@ public class JPanelHomeRegister extends JPanel {
         jDateChooser.setPreferredSize(new Dimension(200, 30));
         this.add(jDateChooser);
 
-        JLabel jLabelHourStar = new JLabel("<html> <center> SE<<LECCIONE LA HORA A PARTIR DE LA CUAL DESEA AGENDAR CITAS <html>",SwingConstants.CENTER);
+        JLabel jLabelHourStar = new JLabel(MESSAGE_SELECT_HOUR,SwingConstants.CENTER);
         jLabelHourStar.setFont(new Font("Cambria", 1, 15));
         jLabelHourStar.setForeground(new Color(220, 67, 134));
         this.add(jLabelHourStar);
@@ -67,7 +77,7 @@ public class JPanelHomeRegister extends JPanel {
         jComboBoxHourStart = new JComboBox<>(new String[]{"8", "9", "10", "11", "12", "14", "15", "16"});
         this.add(jComboBoxHourStart);
 
-        JLabel labelNumber = new JLabel("<html> <center>INDIQUE NÚMERO DE CITAS<html>",SwingConstants.CENTER);
+        JLabel labelNumber = new JLabel(MESSAGE_SELECT_QUANTITY_APPOINTMENTS,SwingConstants.CENTER);
         labelNumber.setFont(new Font("Cambria", 1, 15));
         labelNumber.setForeground(new Color(220, 67, 134));
         this.add(labelNumber);
@@ -76,22 +86,22 @@ public class JPanelHomeRegister extends JPanel {
         jFielNumberAppointment.setPreferredSize(new Dimension(200, 30));
         this.add(jFielNumberAppointment);
 
-        jButtonRegister = new JButton("AGENDAR");
+        jButtonRegister = new JButton(SCHEDULE);
         jButtonRegister.setBounds(239, 558, 125, 40);
         jButtonRegister.setBackground(new Color(49, 153, 139));
         jButtonRegister.addActionListener(homeListener);
-        jButtonRegister.setActionCommand("agendar");
+        jButtonRegister.setActionCommand(SCHEDULE);
         jButtonRegister.setFont(new Font("Cambria", 3, 18));
         jButtonRegister.setForeground(Color.white);
         this.add(jButtonRegister);
 
-        jButtonBack = new JButton("VOLVER");
+        jButtonBack = new JButton(BACK);
         jButtonBack.setBounds(106, 558, 125, 40);
         jButtonBack.setBackground(new Color(49, 153, 139));
         jButtonBack.setFont(new Font("Cambria", 3, 18));
         jButtonBack.setForeground(Color.white);
         jButtonBack.addActionListener(homeListener);
-        jButtonBack.setActionCommand("BACK");
+        jButtonBack.setActionCommand(BACK1);
         this.add(jButtonBack);
     }
 
@@ -121,7 +131,7 @@ public class JPanelHomeRegister extends JPanel {
 
 
     public void paint(Graphics g) {
-        ImageIcon icon = new ImageIcon(".\\resources\\image\\fondo.jpg");
+        ImageIcon icon = new ImageIcon(ROUTE_BACKGROUNDS);
         Image image = new ImageIcon(icon.getImage()).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);

@@ -12,6 +12,8 @@ public class HomeRegisterListener implements ActionListener{
 
     public static final String REGISTER = "REGISTER";
     public static final String BACK_OPTION = "BACK";
+    private static final String SHOW_SCHEDULE = "VER_AGENDA";
+    private static final String SCHEDULE = "AGENDAR";
     private JPanelHomeRegister jPanelHomeRegister;
     private AppointmentManager appointmentManager;
     private JFrameMain jFrameMain;
@@ -26,10 +28,10 @@ public class HomeRegisterListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch (action) {
-            case "verAgenda":
+            case SHOW_SCHEDULE:
                 jPanelHomeRegister.setLabelInformation(appointmentManager.getInformationOfSchedule());
                 break;
-            case "agendar":
+            case SCHEDULE:
                 schedule();
                 break;
             case BACK_OPTION:

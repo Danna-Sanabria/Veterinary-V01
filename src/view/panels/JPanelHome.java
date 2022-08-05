@@ -10,6 +10,8 @@ import java.io.IOException;
 
 public class JPanelHome extends JPanel {
 
+    private static final String LANE_IMAGE = ".\\resources\\image\\1.png";
+    private static final String LANE_BACKGROUND = ".\\resources\\image\\fondo.jpg";
     private JButton jButtonNext;
     private JButton jButtonBack;
     private JLabel jLabelImage;
@@ -25,7 +27,7 @@ public class JPanelHome extends JPanel {
         jLabelImage = new JLabel();
         jLabelImage.setBorder(null);
         jLabelImage.setSize(1050, 490);
-        icon = new ImageIcon(".\\resources\\image\\1.png");
+        icon = new ImageIcon(LANE_IMAGE);
         jLabelImage.setIcon(new ImageIcon(icon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH)));
 
         jButtonNext = new JButton();
@@ -85,7 +87,7 @@ public class JPanelHome extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        ImageIcon icon = new ImageIcon(".\\resources\\image\\fondo.jpg");
+        ImageIcon icon = new ImageIcon(LANE_BACKGROUND);
         Image image = new ImageIcon(icon.getImage()).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);
