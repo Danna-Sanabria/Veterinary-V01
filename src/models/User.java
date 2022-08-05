@@ -10,25 +10,13 @@ public class User {
         this.idUser = idUser;
     }
 
-    public String getNameUser() {
-        return nameUser;
-    }
-
-    public void setNameUser(String nameUser) {
-        this.nameUser = nameUser;
-    }
-
     public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
     @Override
     public String toString() {
-        return  nameUser + "\n" +
-                "Identificación: " + idUser ;
+        return nameUser + "\n" +
+                "Identificación: " + idUser;
     }
 }

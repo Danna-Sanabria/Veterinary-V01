@@ -1,22 +1,25 @@
 package models;
 
 import Structure.TreeAVL;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AppointmentManager {
 
-    private final GregorianCalendar date;
+    private static final String MESSAGE_FIELD = "DEBE RELLENAR EL CAMPO";
+    private static final String MESSAGE_READY_REGISTER = "YA SE ENCUENTRA REGISTRADO";
+    private static final String MESSAGE_USER_NOT_REGISTER = "USUARIO NO REGISTRADO, REGISTRAR PARA CONTINUAR";
+    private static final String DOCTOR_NOT_FOUND = "DOCTOR NO ENCONTRADO";
+    private static final String PRESENCIAL = "PRESENCIAL";
+    private static final String RESIDENCIAL = "DOMICILIO";
     private ArrayList<Pet> clientsRegister;
     private ArrayList<Doctor> doctorList;
     private TreeAVL<MedicalAppointment> medicalAppointmentsListPresential;
     private TreeAVL<MedicalAppointment> medicalAppointmentsListresidency;
-    private MedicalAppointment medical;
 
     public AppointmentManager(ArrayList<MedicalAppointment> listPresential, ArrayList<MedicalAppointment> listResidence) {
-        date = new GregorianCalendar();
+        GregorianCalendar date = new GregorianCalendar();
         clientsRegister = new ArrayList<>();
         doctorList = new ArrayList<>();
         medicalAppointmentsListPresential = new TreeAVL<>((o1, o2) -> validateDates(o1.getDate(), o2.getDate()));
@@ -41,7 +44,7 @@ public class AppointmentManager {
         if (!word.isEmpty() && word.length() <= length) {
             return word;
         }
-        throw new Exception("Debe rellenar el campo");
+        throw new Exception(MESSAGE_FIELD);
     }
 
     public void registerUser(String namePet, String idPet, String typePet, String nameUser, String idUser) {
@@ -55,7 +58,7 @@ public class AppointmentManager {
     public void checkPerson(String idUser) throws Exception {
         for (Pet petWithUser : clientsRegister) {
             if (petWithUser.getIdUser().equalsIgnoreCase(idUser)) {
-                throw new Exception("Esta persona ya se encuentra en el registro");
+                throw new Exception(MESSAGE_READY_REGISTER);
             }
         }
     }
@@ -74,7 +77,7 @@ public class AppointmentManager {
                 return true;
             }
         }
-        throw new Exception("USUARIO NO REGISTRADO, REGISTRAR PARA CONTINUAR");
+        throw new Exception(MESSAGE_USER_NOT_REGISTER);
     }
 
     public Pet foundUser(String idUser) throws Exception {
@@ -92,14 +95,14 @@ public class AppointmentManager {
                 return true;
             }
         }
-        throw new Exception("Doctor no encontrado");
+        throw new Exception(DOCTOR_NOT_FOUND);
     }
 
     public ArrayList<String> filterByModality(String modality) {
         ArrayList<MedicalAppointment> medicalPresencial = medicalAppointmentsListPresential.getListData();
         ArrayList<MedicalAppointment> medicalResidential = medicalAppointmentsListresidency.getListData();
         ArrayList<String> aux = new ArrayList<>();
-        if (modality.equalsIgnoreCase("PRESENCIAL")) {
+        if (modality.equalsIgnoreCase(PRESENCIAL)) {
             for (MedicalAppointment medical2 : medicalPresencial) {
                 if (!medical2.isState()) {
                     aux.add(String.valueOf(medical2));
@@ -119,7 +122,7 @@ public class AppointmentManager {
         ArrayList<MedicalAppointment> medicalPresencial = medicalAppointmentsListPresential.getListData();
         ArrayList<MedicalAppointment> medicalResidential = medicalAppointmentsListresidency.getListData();
         ArrayList<String> aux = new ArrayList<>();
-        if (modality.equalsIgnoreCase("PRESENCIAL")) {
+        if (modality.equalsIgnoreCase(PRESENCIAL)) {
             for (MedicalAppointment medical2 : medicalPresencial) {
                 if (medical2.isState()) {
                     aux.add(String.valueOf(medical2));
@@ -148,7 +151,7 @@ public class AppointmentManager {
         String dayS = (day >= 10) ? day + "" : "0" + day;
         String monthS = (month + 1 >= 10) ? (month + 1) + "" : "0" + (month + 1);
         String hourS = (hour >= 10) ? hour + "" : "0" + hour;
-        return dayS + "/" + monthS + "/" + year  + "/" + hourS + ":00";
+        return dayS + "/" + monthS + "/" + year + "/" + hourS + ":00";
     }
 
     public GregorianCalendar transformStringToDate(String date) {
@@ -163,7 +166,7 @@ public class AppointmentManager {
         GregorianCalendar dateCita = transformStringToDate(date);
         MedicalAppointment medical = new MedicalAppointment(doc, pet, dateCita, true);
         MedicalAppointment medical2;
-        if (modality.equalsIgnoreCase("PRESENCIAL")) {
+        if (modality.equalsIgnoreCase(PRESENCIAL)) {
             medical2 = medicalAppointmentsListPresential.exist(medical);
         } else {
             medical2 = medicalAppointmentsListresidency.exist(medical);
@@ -198,15 +201,15 @@ public class AppointmentManager {
         return data.toString();
     }
 
-    public String getInformationOfSchedule(){
+    public String getInformationOfSchedule() {
         String aux = "";
-        for (MedicalAppointment medical: medicalAppointmentsListPresential.getListData()) {
-            if(medical.isState()) {
+        for (MedicalAppointment medical : medicalAppointmentsListPresential.getListData()) {
+            if (medical.isState()) {
                 aux += "<html>" + medical.dateformat() + " - " + medical.getPet().getNamePet() + " - " + medical.getPet().getTypePet() + "<br> <html>";
             }
         }
-        for (MedicalAppointment medical2: medicalAppointmentsListresidency.getListData()) {
-            if(medical2.isState()) {
+        for (MedicalAppointment medical2 : medicalAppointmentsListresidency.getListData()) {
+            if (medical2.isState()) {
                 aux += "<html>" + medical2.dateformat() + " - " + medical2.getPet().getNamePet() + " - " + medical2.getPet().getTypePet() + "<br> <html>";
             }
         }
@@ -218,7 +221,7 @@ public class AppointmentManager {
         ArrayList<MedicalAppointment> medical = medicalAppointmentsListPresential.getListData();
         ArrayList<MedicalAppointment> medicalResidential = medicalAppointmentsListresidency.getListData();
 
-        if (modality.equalsIgnoreCase("PRESENCIAL")) {
+        if (modality.equalsIgnoreCase(PRESENCIAL)) {
             for (MedicalAppointment medical2 : medical) {
                 if (medical2.getDate().equals(appointmentCancel) && medical2.getIdUser().equalsIgnoreCase(idUser)) {
                     medical2.setPet(null);
@@ -240,7 +243,6 @@ public class AppointmentManager {
     }
 
     private int validateDates(GregorianCalendar o1, GregorianCalendar o2) {
-        //  System.out.println(o1.get(Calendar.MONTH) + " " + o2.get(Calendar.MONTH) + " " + o1.get(Calendar.YEAR) + " " + o2.get(Calendar.YEAR) + " " + o1.get(Calendar.DAY_OF_MONTH) + " " + o2.get(Calendar.DAY_OF_MONTH) + " " + o1.get(Calendar.HOUR_OF_DAY) + " " + o2.get(Calendar.HOUR_OF_DAY));
         if (validateDateActual(o1, o2)) {
             return 0;
         } else if (o1.before(o2)) {
@@ -259,14 +261,14 @@ public class AppointmentManager {
         throw new Exception("");
     }
 
-    public void createSchedule(int numberOfAppointment, String nameDoctor,String date) throws Exception {
+    public void createSchedule(int numberOfAppointment, String nameDoctor, String date) throws Exception {
         GregorianCalendar aux = transformStringToDate(date);
         Doctor doctor = foundDoctor(nameDoctor);
         for (int i = 0; i < numberOfAppointment; i++) {
-            if (doctor.getTypeModality().equalsIgnoreCase("presencial")) {
+            if (doctor.getTypeModality().equalsIgnoreCase(PRESENCIAL)) {
                 System.out.println("--------");
                 medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
-            } else if (doctor.getTypeModality().equalsIgnoreCase("domicilio")) {
+            } else if (doctor.getTypeModality().equalsIgnoreCase(RESIDENCIAL)) {
                 medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null, validateDate(aux), false));
             }
             aux.roll((Calendar.HOUR_OF_DAY), 1);

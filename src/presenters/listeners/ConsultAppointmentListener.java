@@ -2,12 +2,12 @@ package presenters.listeners;
 
 import models.AppointmentManager;
 import view.panels.JPanelSearchAppointment;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConsultAppointmentListener implements ActionListener {
 
+    private static final String CONSULT = "CONSULT";
     private JPanelSearchAppointment jPanelSearchAppointment;
     private AppointmentManager appointmentManager;
 
@@ -20,7 +20,7 @@ public class ConsultAppointmentListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         switch (action) {
-            case "CONSULTAR":
+            case CONSULT:
                 String idUser = jPanelSearchAppointment.getjTextFieldId();
                 String information = String.valueOf(appointmentManager.consultAppointmentsSchedule(idUser));
                 try {

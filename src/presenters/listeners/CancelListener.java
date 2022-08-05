@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class CancelListener implements ActionListener {
 
+    private static final String MODALITY = "MODALITY";
+    private static final String MESSAGE_CANCEL_SUCCESFULL = "CITA CANCELADA CON EXITO";
+    private static final String CANCEL = "CANCEL";
     private JPanelCancelAppointment jPanelCancelAppointment;
     private AppointmentManager appointmentManager;
 
@@ -22,15 +25,15 @@ public class CancelListener implements ActionListener {
         String action = e.getActionCommand();
         try {
             switch (action) {
-                case "MODALITY" -> filterSchedule();
-                case "CANCELAR" -> {
+                case MODALITY -> filterSchedule();
+                case CANCEL -> {
                     cancelAppointment();
-                    System.out.println("cancelada con exito");
+                    jPanelCancelAppointment.messageInformation(MESSAGE_CANCEL_SUCCESFULL);
                 }
             }
 
         } catch (Exception exception) {
-            // TODO: 3/08/2022
+            jPanelCancelAppointment.messageInformation(exception.getMessage());
         }
     }
 
