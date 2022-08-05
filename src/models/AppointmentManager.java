@@ -286,4 +286,8 @@ public class AppointmentManager {
     public ArrayList<MedicalAppointment> listMedicalResidence() {
         return medicalAppointmentsListresidency.getListData();
     }
+
+    public ArrayList<Pet> getListPet() {
+        return clientsRegister;
+    }
 }
