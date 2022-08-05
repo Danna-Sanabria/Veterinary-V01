@@ -21,7 +21,12 @@ public class JFrameInitUser extends JFrame {
     private MedicalAppointment medicalAppointment;
     private JPanel jPanelEnter;
     private JPanel jPanelRegister;
+    private JPanel jPanelEnterDoctor;
     private JTabbedPane jTabbedPane;
+    private JPanel jpanelRegisterDoctor;
+    private JTextField jFieldNameDoctor;
+    private JTextField jFieldPassword;
+    JComboBox<String> jComboBoxModality;
 
     public JFrameInitUser(AppointmentManager appointmentManager, JsonConvert jsonConvert, JFrameMain jFrameMain) {
         super("lOG IN");
@@ -42,17 +47,24 @@ public class JFrameInitUser extends JFrame {
         jFieldNameUser = new JTextField();
         jFieldNamePet = new JTextField();
         jFieldIdPet = new JTextField();
+        jFieldPassword = new JTextField();
+        jFieldNameDoctor = new JTextField();
         JLabel jlabelnameUser = new JLabel("Ingrese nombre del propietario");
         JLabel jlabelidUserEnter = new JLabel("<html> <center>Ingrese identificación del propietario para ingresar<html>");
         JLabel jlabelidUser = new JLabel("<html> <center>Ingrese identificación del propietario<html>");
         JLabel jlabelnamePet = new JLabel("Ingrese nombre de la mascota");
         JLabel jlabelidPet = new JLabel("Ingrese identificacion de la mascota");
         JLabel jlabelTypePet = new JLabel("Seleccione tipo de mascota");
+        JLabel jlabelnameDoctor = new JLabel("<html> <center>Digite nombre para ingresar<html>");
+        JLabel jlabelPasswordDoctor = new JLabel("<html> <center>Ingrese su contraseña <html>");
         JButton jButtonBack = new JButton("SALIR");
         JButton jButtonRegister = new JButton("GUARDAR");
         JButton jButtonBack2 = new JButton("SALIR");
         JButton jButtonValidate = new JButton("VALIDAR");
+        JButton jButtonBack3 = new JButton("SALIR");
+        JButton jButtonValidateDoctor = new JButton("VALIDAR_DOCTOR");
         jComboBoxType = new JComboBox<>(new String[]{"Gato", "Perro"});
+        jComboBoxModality = new JComboBox<>(new String[]{"PRESENCIAL", "DOMICILIO"});
 
         jPanelEnter = new JPanel();
         jPanelEnter.setLayout(new GridLayout(2,4));
@@ -112,6 +124,33 @@ public class JFrameInitUser extends JFrame {
         jButtonRegister.addActionListener(listener);
         jButtonRegister.setActionCommand("REGISTER");
         jPanelRegister.add(jButtonRegister);
+
+        jPanelEnterDoctor = new JPanel();
+        jPanelEnterDoctor.setLayout(new GridLayout(4, 2));
+
+        jPanelEnterDoctor.add(jlabelnameDoctor);
+        initJfield(jPanelEnterDoctor, jFieldNameDoctor, listener);
+
+        jPanelEnterDoctor.add(jlabelPasswordDoctor);
+        initJfield(jPanelEnterDoctor, jFieldPassword, listener);
+
+        jButtonBack3.addActionListener(listener);
+        jPanelEnterDoctor.add(jButtonBack3);
+        jButtonBack3.setActionCommand("EXIT");
+        jButtonBack3.setBackground(new Color(220, 67, 134));
+        jButtonBack3.setForeground(Color.WHITE);
+        jButtonBack3.setBorderPainted(true);
+        jButtonBack3.setFont(new Font("Cambria", 0, 12));
+        jButtonBack3.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jButtonValidateDoctor.addActionListener(listener);
+
+        jButtonValidateDoctor.setActionCommand("validarDoctor");
+        jButtonValidateDoctor.setBackground(new Color(220, 67, 134));
+        jButtonValidateDoctor.setForeground(Color.WHITE);
+        jButtonValidateDoctor.setBorderPainted(true);
+        jButtonValidateDoctor.setFont(new Font("Cambria", 0, 12));
+        jButtonValidateDoctor.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jPanelEnterDoctor.add(jButtonValidateDoctor);
 
         jTabbedPane = new JTabbedPane();
         jTabbedPane.add("INGRESAR" , jPanelEnter);

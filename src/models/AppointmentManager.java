@@ -232,4 +232,30 @@ public class AppointmentManager {
             return 1;
         }
     }
+
+    public Doctor foundDoctor(String nameDoctor) throws Exception {
+        for (Doctor doctor : doctorList) {
+            if (doctor.getNameDoctor().equalsIgnoreCase(nameDoctor)) {
+                return doctor;
+            }
+        }
+        throw new Exception("");
+    }
+
+    public void createSchedule(int numberOfAppointment, String nameDoctor,String date) throws Exception {
+        GregorianCalendar aux = transformStringToDate(date);
+        Doctor doctor = foundDoctor(nameDoctor);
+        for (int i = 0; i < numberOfAppointment; i++) {
+            aux.roll((Calendar.HOUR_OF_DAY),1);
+            if (doctor.getNameDoctor().equalsIgnoreCase("presencial")) {
+                medicalAppointmentsListPresential.insert(new MedicalAppointment(doctor, null, aux, false));
+            } else if (doctor.getNameDoctor().equalsIgnoreCase("domicilio")) {
+                medicalAppointmentsListresidency.insert(new MedicalAppointment(doctor, null, aux, false));
+            }
+        }
+    }
+
+    public GregorianCalendar validateDate(GregorianCalendar aux){
+        return new GregorianCalendar(aux.get(Calendar.YEAR), aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH), aux.get(Calendar.HOUR_OF_DAY) + 1, 0);
+    }
 }
